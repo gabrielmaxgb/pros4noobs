@@ -2,7 +2,7 @@
 import type { StepperItem } from "@nuxt/ui";
 import p4nLogo from "~/public/p4n-logo.svg";
 
-const stepperItems = ref([
+const stepperItems = [
   {
     title: "Cadastre-se",
     content: "Preencha um formulário simples como noob ou pro.",
@@ -18,7 +18,7 @@ const stepperItems = ref([
     content: "Troque experiências, tire dúvidas e avance com apoio real.",
     icon: "i-lucide-terminal",
   },
-]);
+];
 
 const heroActionButtons = [
   {
@@ -45,6 +45,12 @@ const heroActionButtons = [
 ];
 
 const stepperActive = ref(0);
+
+onMounted(() => {
+  setInterval(() => {
+    stepperActive.value = (stepperActive.value + 1) % stepperItems.length;
+  }, 2500);
+});
 </script>
 
 <template>
@@ -52,7 +58,7 @@ const stepperActive = ref(0);
     <!-- Hero Section -->
     <section class="pt-10 w-10/12 text-center space-y-8 text-gray-300">
       <h1 class="text-5xl font-semibold font-header leading-tight text-primary">
-        Comece sua jornada na programação com apoio de verdade.
+        Comece sua jornada no mundo da tecnologia com apoio de verdade.
       </h1>
 
       <p class="text-lg leading-relaxed">
