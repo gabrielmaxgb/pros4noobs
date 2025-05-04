@@ -1,3 +1,38 @@
+<script setup lang="ts">
+definePageMeta({
+  middleware: "block-route",
+});
+
+const code = ref("");
+const statusResult = ref<{ status: string; createdAt: string } | null>(null);
+const loading = ref(false);
+const error = ref("");
+
+async function handleSubmit() {
+  error.value = "";
+  statusResult.value = null;
+  loading.value = true;
+
+  try {
+    const result = await $fetch(`/api/noobs/${code.value}`);
+    statusResult.value = result as any;
+  } catch (err: any) {
+    error.value =
+      err?.data?.message || "Código inválido ou erro na requisição.";
+  } finally {
+    loading.value = false;
+  }
+}
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
+</script>
+
 <template>
   <div class="max-w-md mx-auto py-10 px-4">
     <h1 class="text-2xl font-bold mb-4">👀 Acompanhe seu status na fila</h1>
@@ -30,36 +65,5 @@
     <p v-if="error" class="text-red-600 mt-4">{{ error }}</p>
   </div>
 </template>
-
-<script setup lang="ts">
-const code = ref("");
-const statusResult = ref<{ status: string; createdAt: string } | null>(null);
-const loading = ref(false);
-const error = ref("");
-
-async function handleSubmit() {
-  error.value = "";
-  statusResult.value = null;
-  loading.value = true;
-
-  try {
-    const result = await $fetch(`/api/noobs/${code.value}`);
-    statusResult.value = result as any;
-  } catch (err: any) {
-    error.value =
-      err?.data?.message || "Código inválido ou erro na requisição.";
-  } finally {
-    loading.value = false;
-  }
-}
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-}
-</script>
 
 <style scoped></style>

@@ -20,6 +20,30 @@ const stepperItems = ref([
   },
 ]);
 
+const heroActionButtons = [
+  {
+    label: "Sou noob e quero começar",
+    to: "/register",
+    variant: "outline",
+    color: "primary",
+    disabled: true,
+  },
+  {
+    label: "Sou dev experiente e quero ajudar",
+    to: "/pro-register",
+    variant: "soft",
+    color: "warning",
+    disabled: true,
+  },
+  {
+    label: "Acompanhar meu cadastro",
+    to: "/track",
+    variant: "soft",
+    color: "secondary",
+    disabled: true,
+  },
+];
+
 const stepperActive = ref(0);
 </script>
 
@@ -37,20 +61,18 @@ const stepperActive = ref(0);
       </p>
 
       <div class="flex flex-col md:flex-row gap-4 justify-center">
-        <NuxtLink to="/register">
-          <UButton color="primary" variant="outline"
-            >Sou noob e quero começar</UButton
+        <NuxtLink
+          v-for="(btn, index) in heroActionButtons"
+          :to="btn?.disabled ? '#' : btn.to"
+          :class="[btn.disabled ? 'cursor-not-allowed opacity-50' : '']"
+        >
+          <UButton
+            :color="(btn.color as any)"
+            :variant="(btn.variant as any)"
+            :disabled="btn.disabled"
           >
-        </NuxtLink>
-        <NuxtLink to="/pro-register">
-          <UButton color="warning" variant="soft"
-            >Sou dev experiente e quero ajudar</UButton
-          >
-        </NuxtLink>
-        <NuxtLink to="/track">
-          <UButton color="secondary" variant="soft"
-            >Acompanhar meu cadastro</UButton
-          >
+            {{ btn.label }}
+          </UButton>
         </NuxtLink>
       </div>
     </section>
