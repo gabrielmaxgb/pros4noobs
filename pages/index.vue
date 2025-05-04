@@ -2,7 +2,7 @@
 import type { StepperItem } from "@nuxt/ui";
 import p4nLogo from "~/public/p4n-logo.svg";
 
-const stepperItems = ref([
+const stepperItems = [
   {
     title: "Cadastre-se",
     content: "Preencha um formulário simples como noob ou pro.",
@@ -18,7 +18,7 @@ const stepperItems = ref([
     content: "Troque experiências, tire dúvidas e avance com apoio real.",
     icon: "i-lucide-terminal",
   },
-]);
+];
 
 const heroActionButtons = [
   {
@@ -45,6 +45,12 @@ const heroActionButtons = [
 ];
 
 const stepperActive = ref(0);
+
+onMounted(() => {
+  setInterval(() => {
+    stepperActive.value = (stepperActive.value + 1) % stepperItems.length;
+  }, 2500);
+});
 </script>
 
 <template>
