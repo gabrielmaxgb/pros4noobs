@@ -52,7 +52,7 @@ const stepperActive = ref(0);
     <!-- Hero Section -->
     <section class="pt-10 w-10/12 text-center space-y-8 text-gray-300">
       <h1 class="text-5xl font-semibold font-header leading-tight text-primary">
-        Comece sua jornada na programação com apoio de verdade.
+        teste dev branch
       </h1>
 
       <p class="text-lg leading-relaxed">
