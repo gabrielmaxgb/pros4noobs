@@ -23,7 +23,7 @@ const stepperItems = [
 const heroActionButtons = [
   {
     label: "Sou noob e quero começar",
-    to: "/register",
+    to: "/noob-register",
     variant: "outline",
     color: "primary",
     disabled: true,

@@ -16,31 +16,33 @@ const error = ref("");
 const loading = ref(false);
 
 async function handleSubmit() {
-  error.value = "";
-  loading.value = true;
-
-  try {
-    const { trackingCode: code } = await $fetch("/api/noobs", {
-      method: "POST",
-      body: {
-        name: form.name,
-        email: form.email,
-        areaOfInterest: [form.areaOfInterest],
-        technologies: form.technologies.split(",").map((t) => t.trim()),
-        availability: [form.availability],
-      },
-    });
-
-    trackingCode.value = code;
-  } catch (err: any) {
-    error.value = err?.data?.message || "Erro desconhecido.";
-  } finally {
-    loading.value = false;
-  }
+  // error.value = "";
+  // loading.value = true;
+  // try {
+  //   const { trackingCode: code } = await $fetch("/api/noobs", {
+  //     method: "POST",
+  //     body: {
+  //       name: form.name,
+  //       email: form.email,
+  //       areaOfInterest: [form.areaOfInterest],
+  //       technologies: form.technologies.split(",").map((t) => t.trim()),
+  //       availability: [form.availability],
+  //     },
+  //   });
+  //   trackingCode.value = code;
+  // } catch (err: any) {
+  //   error.value = err?.data?.message || "Erro desconhecido.";
+  // } finally {
+  //   loading.value = false;
+  // }
 }
 </script>
 
 <template>
+  <!-- 
+    
+  -->
+
   <div class="max-w-md mx-auto py-10 px-4">
     <h1 class="text-2xl font-bold mb-6">
       🚀 Comece sua jornada na programação
