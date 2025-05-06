@@ -39,10 +39,6 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <!-- 
-    
-  -->
-
   <div class="max-w-md mx-auto py-10 px-4">
     <h1 class="text-2xl font-bold mb-6">
       🚀 Comece sua jornada na programação
