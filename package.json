@@ -20,6 +20,7 @@
     "@tailwindcss/vite": "^4.1.5",
     "@unhead/vue": "^2.0.8",
     "eslint": "^9.26.0",
+    "mongodb": "^6.16.0",
     "nuxt": "^3.17.1",
     "tailwindcss": "^4.1.5",
     "typescript": "^5.8.3",
