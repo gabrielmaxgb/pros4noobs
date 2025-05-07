@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { StepperItem } from "@nuxt/ui";
-import p4nLogo from "~/public/p4n-logo.svg";
+import { useQuery } from "@tanstack/vue-query";
 
 const stepperItems = [
   {
@@ -46,12 +45,22 @@ const heroActionButtons = [
 
 const stepperActive = ref(0);
 
-const handleTest = async () => {
+const fetchMovies = async () => {
   const res = await $fetch("/api/test", {
-    // method: "GET",
+    method: "GET",
   });
   console.log("res", res);
+  return res;
 };
+
+const {
+  data: movies,
+  isPending,
+  isError,
+} = useQuery({
+  queryKey: ["movies"],
+  queryFn: fetchMovies,
+});
 
 onMounted(() => {
   setInterval(() => {
@@ -65,6 +74,10 @@ onMounted(() => {
     <!-- <UButton :color="'primary'" :variant="'ghost'" @click="handleTest">
       test
     </UButton> -->
+
+    movies: {{ movies }}<br />
+    isPending: {{ isPending }}<br />
+    isError: {{ isError }}<br />
 
     <!-- Hero Section -->
     <section class="pt-10 w-10/12 text-center space-y-8 text-gray-300">
