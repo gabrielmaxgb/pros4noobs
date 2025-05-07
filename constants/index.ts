@@ -14,7 +14,7 @@ export const navigationOptions = [
   {
     label: "Cadastre-se, Noob",
     icon: "mingcute:bug-fill",
-    to: "/register",
+    to: "/noob-register",
     disabled: true,
   },
   {
