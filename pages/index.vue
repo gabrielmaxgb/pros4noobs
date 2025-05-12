@@ -53,14 +53,14 @@ const fetchMovies = async () => {
   return res;
 };
 
-const {
-  data: movies,
-  isPending,
-  isError,
-} = useQuery({
-  queryKey: ["movies"],
-  queryFn: fetchMovies,
-});
+// const {
+//   data: movies,
+//   isPending,
+//   isError,
+// } = useQuery({
+//   queryKey: ["movies"],
+//   queryFn: fetchMovies,
+// });
 
 onMounted(() => {
   setInterval(() => {
@@ -75,9 +75,9 @@ onMounted(() => {
       test
     </UButton> -->
 
-    movies: {{ movies }}<br />
+    <!-- movies: {{ movies }}<br />
     isPending: {{ isPending }}<br />
-    isError: {{ isError }}<br />
+    isError: {{ isError }}<br /> -->
 
     <!-- Hero Section -->
     <section class="pt-10 w-10/12 text-center space-y-8 text-gray-300">
