@@ -14,8 +14,6 @@ interface StepperRef {
   hasNext: Ref<boolean>;
   hasPrev: Ref<boolean>;
 }
-
-const currentStep = ref<number>(1);
 const stepperCurrent = useTemplateRef<StepperRef>("stepperCurrent");
 const onBoardingStore = useOnBoardingStore();
 const isFormSubmittionLoading = ref(false);
@@ -108,10 +106,9 @@ const handleNextStepClick = (item: StepperItem) => {
   }
 };
 
-const handleRestartRegistrationFormClick = async () => {
-  console.log("123");
+const handleRestartRegistrationFormClick = () => {
   onBoardingStore.reset();
-  await registrationFormStepperItems.value.forEach(() =>
+  registrationFormStepperItems.value.forEach(() =>
     stepperCurrent.value?.prev()
   );
 };
@@ -136,12 +133,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  onBoadingStore: {{ onBoardingStore.registrationForm }}<br />
-  onBoadingStoreErrors: {{ onBoardingStore.registrationFormErrors }}<br />
+  <!-- onBoadingStore: {{ onBoardingStore.registrationForm }}<br />
+  onBoadingStoreErrors: {{ onBoardingStore.registrationFormErrors }}<br /> -->
   <form class="w-full flex flex-col" @submit.prevent="handleSubmitRegistration">
     <UStepper
       :ref="'stepperCurrent'"
-      v-model="currentStep"
       :items="registrationFormStepperItems"
       size="lg"
       :disabled="true"
@@ -161,11 +157,11 @@ onBeforeUnmount(() => {
                 :variant="isBackButtonDisabled ? 'link' : 'solid'"
                 size="xl"
                 :disabled="isBackButtonDisabled"
-                @click="() => (currentStep = item.prevStep)"
+                @click="stepperCurrent?.prev"
               >
                 {{ item.backButtonLabel }}
               </UButton>
-              item.step: {{ item.step }}<br />
+              <!-- item.step: {{ item.step }}<br /> -->
               <UButton
                 class="cursor-pointer text-base"
                 color="primary"
