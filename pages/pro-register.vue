@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: "block-route",
+  // middleware: "block-route",
 });
 
 const form = reactive({

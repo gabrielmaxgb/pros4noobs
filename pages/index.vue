@@ -1,7 +1,19 @@
 <script setup lang="ts">
-import { useQuery } from "@tanstack/vue-query";
+interface IHeroActionButton {
+  label: string;
+  to: string;
+  variant: string;
+  color: string;
+  disabled: boolean;
+}
 
-const stepperItems = [
+interface IStepperItem {
+  title: string;
+  content: string;
+  icon: string;
+}
+
+const stepperItems: IStepperItem[] = [
   {
     title: "Cadastre-se",
     content: "Preencha um formulário simples como noob ou pro.",
@@ -19,27 +31,13 @@ const stepperItems = [
   },
 ];
 
-const heroActionButtons = [
+const heroActionButtons: IHeroActionButton[] = [
   {
-    label: "Sou noob e quero começar",
-    to: "/noob-register",
+    label: "Faça parte dessa história",
+    to: "/onboarding",
     variant: "outline",
     color: "primary",
-    disabled: true,
-  },
-  {
-    label: "Sou dev experiente e quero ajudar",
-    to: "/pro-register",
-    variant: "soft",
-    color: "warning",
-    disabled: true,
-  },
-  {
-    label: "Acompanhar meu cadastro",
-    to: "/track",
-    variant: "soft",
-    color: "secondary",
-    disabled: true,
+    disabled: false,
   },
 ];
 
@@ -52,15 +50,6 @@ const fetchMovies = async () => {
   console.log("res", res);
   return res;
 };
-
-// const {
-//   data: movies,
-//   isPending,
-//   isError,
-// } = useQuery({
-//   queryKey: ["movies"],
-//   queryFn: fetchMovies,
-// });
 
 onMounted(() => {
   setInterval(() => {
@@ -93,6 +82,7 @@ onMounted(() => {
       <div class="flex flex-col md:flex-row gap-4 justify-center">
         <NuxtLink
           v-for="(btn, index) in heroActionButtons"
+          :key="index"
           :to="btn?.disabled ? '#' : btn.to"
           :class="[btn.disabled ? 'cursor-not-allowed opacity-50' : '']"
         >

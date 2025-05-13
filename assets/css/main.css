@@ -2,60 +2,57 @@
 @import "@nuxt/ui";
 
 @theme {
-  
-  --font-sans: "Chakra Petch", sans-serif;
---font-serif: "Gloock", serif;
---font-mono: "JetBrains Mono", monospace;
---font-header: "Staatliches", sans-serif;
---font-script: "Orbitron", cursive;
+	--font-sans: "Chakra Petch", sans-serif;
+	--font-serif: "Gloock", serif;
+	--font-mono: "JetBrains Mono", monospace;
+	--font-header: "Staatliches", sans-serif;
+	--font-script: "Orbitron", cursive;
 
-  /* caracas */
-  /* --font-sans: "Chakra Petch", sans-serif;
+	/* --font-sans: "Chakra Petch", sans-serif;
 --font-serif: "Cinzel", serif;
 --font-mono: "Major Mono Display", monospace;
 --font-header: "Staatliches", sans-serif;
 --font-script: "Arizonia", cursive; */
 
-  /* hmm */
-  /* --font-sans: "Asap", sans-serif;
+	/* --font-sans: "Asap", sans-serif;
 --font-serif: "Bitter", serif;
 --font-mono: "Zed Mono", monospace;
 --font-header: "Jost", sans-serif;
 --font-script: "Euphoria Script", cursive; */
 
-  /* --font-sans: "Mulish", sans-serif;
+	/* --font-sans: "Mulish", sans-serif;
 --font-serif: "Zilla Slab", serif;
 --font-mono: "Share Tech Mono", monospace;
 --font-header: "Comfortaa", sans-serif;
 --font-script: "Satisfy", cursive; */
 
-  /* --font-sans: "Poppins", sans-serif;
+	/* --font-sans: "Poppins", sans-serif;
 --font-serif: "Newsreader", serif;
 --font-mono: "Cutive Mono", monospace;
 --font-header: "Syncopate", sans-serif;
 --font-script: "Parisienne", cursive; */
 
-  /* 1 */
-  /* --font-sans: "Chivo", sans-serif;
+	/* 1 */
+	/* --font-sans: "Chivo", sans-serif;
 --font-serif: "Roboto Slab", serif;
 --font-mono: "IBM Plex Mono", monospace;
 --font-header: "Unbounded", sans-serif;
 --font-script: "Covered By Your Grace", cursive; */
 
-  /* --font-sans: "Figtree", sans-serif;
+	/* --font-sans: "Figtree", sans-serif;
 --font-serif: "Cormorant Garamond", serif;
 --font-mono: "JetBrains Mono", monospace;
 --font-header: "Bricolage Grotesque", sans-serif;
 --font-script: "Pacifico", cursive; */
-  
-  /* --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+	/* --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-header: "Hedvig Letters Serif", serif;
   --font-script: Great Vibes, cursive; */
 
-  /* UI Colors */
-  /* --color-secondary: #ffffff;     
+	/* UI Colors */
+	/* --color-secondary: #ffffff;     
   --color-primary: #111111;   
   --color-success: #0f766e;  
   --color-info:    #0284c7;  
@@ -64,7 +61,7 @@
   --color-neutral: #9ca3af;  
   --color-tertiary: #1e293b;   */
 
-  /* Custom Colors */
-  --color-internal-black: #111111;
-  --color-internal-link: #007bff;
+	/* Custom Colors */
+	--color-internal-black: #111111;
+	--color-internal-link: #007bff;
 }
