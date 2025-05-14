@@ -1,3 +1,1 @@
-export interface Noob {
-  
-}
+export interface Noob {}

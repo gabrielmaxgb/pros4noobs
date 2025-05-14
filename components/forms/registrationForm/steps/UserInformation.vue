@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const onBoardingStore = useOnBoardingStore();
+  const onBoardingStore = useOnBoardingStore();
 </script>
 
 <template>
@@ -12,10 +12,7 @@ const onBoardingStore = useOnBoardingStore();
       class="w-full"
       size="xl"
     />
-    <p
-      v-if="onBoardingStore.registrationFormErrors.name"
-      class="text-red-500 text-sm mt-1"
-    >
+    <p v-if="onBoardingStore.registrationFormErrors.name" class="text-red-500 text-sm mt-1">
       {{ onBoardingStore.registrationFormErrors.name }}
     </p>
   </div>
@@ -29,10 +26,7 @@ const onBoardingStore = useOnBoardingStore();
       class="w-full"
       size="xl"
     />
-    <p
-      v-if="onBoardingStore.registrationFormErrors.email"
-      class="text-red-500 text-sm mt-1"
-    >
+    <p v-if="onBoardingStore.registrationFormErrors.email" class="text-red-500 text-sm mt-1">
       {{ onBoardingStore.registrationFormErrors.email }}
     </p>
   </div>
