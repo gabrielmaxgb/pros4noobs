@@ -89,7 +89,7 @@
 
     if (!result.success) {
       result.error.issues.forEach((issue) => {
-        const field = issue.path[0] as keyof IRegistrationForm;
+        const field = issue.path[0] as keyof TRegistrationForm;
         onBoardingStore.registrationFormErrors[field] = issue.message;
       });
       return;
@@ -131,7 +131,7 @@
 <template>
   <!-- onBoadingStore: {{ onBoardingStore.registrationForm }}<br />
   onBoadingStoreErrors: {{ onBoardingStore.registrationFormErrors }}<br /> -->
-  <form class="w-full flex flex-col" @submit.prevent="handleSubmitRegistration">
+  <form class="w-full flex flex-col" novalidate @submit.prevent="handleSubmitRegistration">
     <UStepper
       :ref="'stepperCurrent'"
       :items="registrationFormStepperItems"

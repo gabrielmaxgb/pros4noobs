@@ -12,13 +12,11 @@
       :style="{ maxHeight: `calc(100vh - ${TOP_NAVBAR_HEIGHT})` }"
     >
       <span
-        class="text-warning rounded-none bg-warning/20 flex itens-center justify-center font-bold text-2xl text-center p-2 max-h-max w-full gap-4"
+        class="text-warning rounded-none bg-warning/20 flex itens-center justify-center font-semibold text-base md:text-2xl text-center p-2 max-h-max w-full gap-4"
       >
-        <UIcon :name="'typcn:warning'" size="30" class="hidden lg:block" />
         Estamos nos preparando para dar início às nossas atividades! Fique ligado!
-        <UIcon :name="'typcn:warning'" size="30" class="hidden lg:block" />
       </span>
-      <div class="w-12/12 py-6">
+      <div class="w-12/12 pt-6">
         <slot />
       </div>
     </div>

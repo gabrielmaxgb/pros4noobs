@@ -1,7 +1,7 @@
 import type { z as zType } from 'zod';
 import { z } from 'zod';
 
-export type IRegistrationForm = zType.infer<typeof registrationFormSchema>;
+export type TRegistrationForm = zType.infer<typeof registrationFormSchema>;
 
 export const registrationFormSchema = z.object({
   name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
@@ -12,7 +12,7 @@ export const registrationFormSchema = z.object({
   startRole: z.enum(['noob', 'pro']),
 });
 
-const REGISTRATION_FORM_DEFAULT: IRegistrationForm = {
+const REGISTRATION_FORM_DEFAULT: TRegistrationForm = {
   name: '',
   email: '',
   superBeginner: false,
@@ -22,7 +22,7 @@ const REGISTRATION_FORM_DEFAULT: IRegistrationForm = {
 };
 
 export const useOnBoardingStore = defineStore('onBoardingStore', () => {
-  const registrationForm = reactive<IRegistrationForm>({
+  const registrationForm = reactive<TRegistrationForm>({
     name: '',
     email: '',
     superBeginner: false,
@@ -30,7 +30,7 @@ export const useOnBoardingStore = defineStore('onBoardingStore', () => {
     technologies: [],
     startRole: 'noob',
   });
-  const registrationFormErrors = reactive<Partial<Record<keyof IRegistrationForm, string>>>({});
+  const registrationFormErrors = reactive<Partial<Record<keyof TRegistrationForm, string>>>({});
 
   const reset = () => {
     registrationForm.name = REGISTRATION_FORM_DEFAULT.name;
