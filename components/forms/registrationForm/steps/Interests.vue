@@ -1,24 +1,24 @@
 <script setup lang="ts">
-const onBoardingStore = useOnBoardingStore();
-const areasOfInterestItems = ref(["Backlog", "Todo", "In Progress", "Done"]);
-const technologiesItems = ref([
-  "JavaScript",
-  "TypeScript",
-  "Python",
-  "Java",
-  "C#",
-  "PHP",
-  "Ruby",
-  "Go",
-  "JavaScript2",
-  "TypeScript2",
-  "Python2",
-  "Java2",
-  "C#2",
-  "PHP2",
-  "Ruby2",
-  "Go2",
-]);
+  const onBoardingStore = useOnBoardingStore();
+  const areasOfInterestItems = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
+  const technologiesItems = ref([
+    'JavaScript',
+    'TypeScript',
+    'Python',
+    'Java',
+    'C#',
+    'PHP',
+    'Ruby',
+    'Go',
+    'JavaScript2',
+    'TypeScript2',
+    'Python2',
+    'Java2',
+    'C#2',
+    'PHP2',
+    'Ruby2',
+    'Go2',
+  ]);
 </script>
 
 <template>
@@ -70,10 +70,7 @@ const technologiesItems = ref([
         onBoardingStore.registrationForm.superBeginner
       "
     />
-    <p
-      v-if="onBoardingStore.registrationFormErrors.technologies"
-      class="text-red-500 text-sm mt-1"
-    >
+    <p v-if="onBoardingStore.registrationFormErrors.technologies" class="text-red-500 text-sm mt-1">
       {{ onBoardingStore.registrationFormErrors.technologies }}
     </p>
   </div>

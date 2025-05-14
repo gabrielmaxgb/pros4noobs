@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TOP_NAVBAR_HEIGHT, navigationOptions } from "~/constants";
+  import { TOP_NAVBAR_HEIGHT, navigationOptions } from '~/constants';
 </script>
 
 <template>

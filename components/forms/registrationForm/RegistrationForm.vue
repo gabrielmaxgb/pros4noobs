@@ -1,135 +1,131 @@
 <script setup lang="ts">
-import { markRaw } from "vue";
-import UserInformation from "./steps/UserInformation.vue";
-import Interests from "./steps/Interests.vue";
-import Role from "./steps/Role.vue";
-import Success from "./steps/Success.vue";
-import type { StepperItem } from "@nuxt/ui";
-import { useOnBoardingStore } from "~/stores/onBoardingStore";
+  import { markRaw } from 'vue';
+  import UserInformation from './steps/UserInformation.vue';
+  import Interests from './steps/Interests.vue';
+  import Role from './steps/Role.vue';
+  import Success from './steps/Success.vue';
+  import type { StepperItem } from '@nuxt/ui';
+  import { useOnBoardingStore } from '~/stores/onBoardingStore';
 
-interface StepperRef {
-  next: () => void;
-  prev: () => void;
-  set: (step: number) => void;
-  hasNext: Ref<boolean>;
-  hasPrev: Ref<boolean>;
-}
-const stepperCurrent = useTemplateRef<StepperRef>("stepperCurrent");
-const onBoardingStore = useOnBoardingStore();
-const isFormSubmittionLoading = ref(false);
-const registrationFormStepperItems = ref<StepperItem[]>([
-  {
-    step: 1,
-    nextStep: 2,
-    // title: "Dados pessoais",
-    description: "Dados pessoais",
-    icon: "i-lucide-user",
-    component: markRaw(UserInformation),
-    backButtonLabel: "Voltar",
-    nextButtonLabel: "Próximo",
-  },
-  {
-    prevStep: 1,
-    step: 2,
-    nextStep: 3,
-    // title: "Selecione seu papel",
-    description: "Selecione seu papel",
-    icon: "i-lucide-briefcase",
-    component: markRaw(Role),
-    backButtonLabel: "Voltar",
-    nextButtonLabel: "Próximo",
-  },
-  {
-    prevStep: 2,
-    step: 3,
-    nextStep: 4,
-    // title: "Tecnologias de interesse",
-    description: "Tecnologias de interesse",
-    icon: "i-lucide-star",
-    component: markRaw(Interests),
-    backButtonLabel: "Voltar",
-    nextButtonLabel: "Concluir",
-  },
-  {
-    prevStep: 3,
-    step: 4,
-    // title: "Sucesso",
-    description: "Sucesso",
-    icon: "i-lucide-check-circle",
-    component: markRaw(Success),
-  },
-]);
-
-const isBackButtonDisabled = computed(() => {
-  return !stepperCurrent?.value?.hasPrev;
-});
-
-const isNextButtonDisabled = (currentStep: number) => {
-  if (!stepperCurrent?.value?.hasNext) {
-    return true;
+  interface StepperRef {
+    next: () => void;
+    prev: () => void;
+    set: (step: number) => void;
+    hasNext: Ref<boolean>;
+    hasPrev: Ref<boolean>;
   }
-  const form = onBoardingStore.registrationForm;
+  const stepperCurrent = useTemplateRef<StepperRef>('stepperCurrent');
+  const onBoardingStore = useOnBoardingStore();
+  const isFormSubmittionLoading = ref(false);
+  const registrationFormStepperItems = ref<StepperItem[]>([
+    {
+      step: 1,
+      nextStep: 2,
+      // title: "Dados pessoais",
+      description: 'Dados pessoais',
+      icon: 'i-lucide-user',
+      component: markRaw(UserInformation),
+      backButtonLabel: 'Voltar',
+      nextButtonLabel: 'Próximo',
+    },
+    {
+      prevStep: 1,
+      step: 2,
+      nextStep: 3,
+      // title: "Selecione seu papel",
+      description: 'Selecione seu papel',
+      icon: 'i-lucide-briefcase',
+      component: markRaw(Role),
+      backButtonLabel: 'Voltar',
+      nextButtonLabel: 'Próximo',
+    },
+    {
+      prevStep: 2,
+      step: 3,
+      nextStep: 4,
+      // title: "Tecnologias de interesse",
+      description: 'Tecnologias de interesse',
+      icon: 'i-lucide-star',
+      component: markRaw(Interests),
+      backButtonLabel: 'Voltar',
+      nextButtonLabel: 'Concluir',
+    },
+    {
+      prevStep: 3,
+      step: 4,
+      // title: "Sucesso",
+      description: 'Sucesso',
+      icon: 'i-lucide-check-circle',
+      component: markRaw(Success),
+    },
+  ]);
 
-  switch (currentStep) {
-    case 1:
-      return !(form.name && form.email);
-    case 2:
-      return !form.startRole;
-    case 3:
-      return form.superBeginner
-        ? false
-        : !(form.technologies.length > 0 && form.areasOfInterest.length > 0);
-    default:
-      return false;
-  }
-};
+  const isBackButtonDisabled = computed(() => {
+    return !stepperCurrent?.value?.hasPrev;
+  });
 
-const handleNextStepClick = (item: StepperItem) => {
-  const result = registrationFormSchema.safeParse(
-    onBoardingStore.registrationForm
-  );
+  const isNextButtonDisabled = (currentStep: number) => {
+    if (!stepperCurrent?.value?.hasNext) {
+      return true;
+    }
+    const form = onBoardingStore.registrationForm;
 
-  if (!result.success) {
-    result.error.issues.forEach((issue) => {
-      const field = issue.path[0] as keyof IRegistrationForm;
-      onBoardingStore.registrationFormErrors[field] = issue.message;
-    });
-    return;
-  }
+    switch (currentStep) {
+      case 1:
+        return !(form.name && form.email);
+      case 2:
+        return !form.startRole;
+      case 3:
+        return form.superBeginner
+          ? false
+          : !(form.technologies.length > 0 && form.areasOfInterest.length > 0);
+      default:
+        return false;
+    }
+  };
 
-  onBoardingStore.registrationFormErrors = {};
+  const handleNextStepClick = (item: StepperItem) => {
+    const result = registrationFormSchema.safeParse(onBoardingStore.registrationForm);
 
-  if (item.step === registrationFormStepperItems.value.length - 1) {
-    handleSubmitRegistration();
-  } else {
-    stepperCurrent?.value?.next();
-  }
-};
+    if (!result.success) {
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as keyof IRegistrationForm;
+        onBoardingStore.registrationFormErrors[field] = issue.message;
+      });
+      return;
+    }
 
-const handleRestartRegistrationFormClick = () => {
-  onBoardingStore.reset();
-  registrationFormStepperItems.value.forEach(() =>
-    stepperCurrent.value?.prev()
-  );
-};
+    onBoardingStore.registrationFormErrors = {};
 
-const handleSubmitRegistration = async () => {
-  try {
-    // TODO: Implement form submission
-    await Promise.resolve(); // Placeholder for API call
-    stepperCurrent?.value?.next();
-  } catch (error) {
-    console.error("Failed to submit registration form:", error);
-    // TODO: Add proper error handling
-  } finally {
-    isFormSubmittionLoading.value = false;
-  }
-};
+    if (item.step === registrationFormStepperItems.value.length - 1) {
+      handleSubmitRegistration();
+    } else {
+      stepperCurrent?.value?.next();
+    }
+  };
 
-onBeforeUnmount(() => {
-  onBoardingStore.registrationFormErrors = {};
-  onBoardingStore.reset();
-});
+  const handleRestartRegistrationFormClick = () => {
+    onBoardingStore.reset();
+    registrationFormStepperItems.value.forEach(() => stepperCurrent.value?.prev());
+  };
+
+  const handleSubmitRegistration = async () => {
+    try {
+      // TODO: Implement form submission
+      await Promise.resolve(); // Placeholder for API call
+      stepperCurrent?.value?.next();
+    } catch (error) {
+      console.error('Failed to submit registration form:', error);
+      // TODO: Add proper error handling
+    } finally {
+      isFormSubmittionLoading.value = false;
+    }
+  };
+
+  onBeforeUnmount(() => {
+    onBoardingStore.registrationFormErrors = {};
+    onBoardingStore.reset();
+  });
 </script>
 
 <template>
