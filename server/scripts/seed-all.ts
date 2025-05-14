@@ -14,5 +14,4 @@ export default async function runSeeds() {
   }
 
   console.log('Seeding complete.')
-  process.exit(0)
 }
