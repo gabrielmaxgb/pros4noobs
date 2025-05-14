@@ -1,8 +1,19 @@
 <script setup lang="ts">
-import type { StepperItem } from "@nuxt/ui";
-import p4nLogo from "~/public/p4n-logo.svg";
+interface IHeroActionButton {
+  label: string;
+  to: string;
+  variant: string;
+  color: string;
+  disabled: boolean;
+}
 
-const stepperItems = [
+interface IStepperItem {
+  title: string;
+  content: string;
+  icon: string;
+}
+
+const stepperItems: IStepperItem[] = [
   {
     title: "Cadastre-se",
     content: "Preencha um formulário simples como noob ou pro.",
@@ -20,37 +31,24 @@ const stepperItems = [
   },
 ];
 
-const heroActionButtons = [
+const heroActionButtons: IHeroActionButton[] = [
   {
-    label: "Sou noob e quero começar",
-    to: "/noob-register",
+    label: "Faça parte dessa história",
+    to: "/onboarding",
     variant: "outline",
     color: "primary",
-    disabled: true,
-  },
-  {
-    label: "Sou dev experiente e quero ajudar",
-    to: "/pro-register",
-    variant: "soft",
-    color: "warning",
-    disabled: true,
-  },
-  {
-    label: "Acompanhar meu cadastro",
-    to: "/track",
-    variant: "soft",
-    color: "secondary",
-    disabled: true,
+    disabled: false,
   },
 ];
 
 const stepperActive = ref(0);
 
-const handleTest = async () => {
+const fetchMovies = async () => {
   const res = await $fetch("/api/test", {
-    // method: "GET",
+    method: "GET",
   });
   console.log("res", res);
+  return res;
 };
 
 onMounted(() => {
@@ -66,6 +64,10 @@ onMounted(() => {
       test
     </UButton> -->
 
+    <!-- movies: {{ movies }}<br />
+    isPending: {{ isPending }}<br />
+    isError: {{ isError }}<br /> -->
+
     <!-- Hero Section -->
     <section class="pt-10 w-10/12 text-center space-y-8 text-gray-300">
       <h1 class="text-5xl font-semibold font-header leading-tight text-primary">
@@ -80,6 +82,7 @@ onMounted(() => {
       <div class="flex flex-col md:flex-row gap-4 justify-center">
         <NuxtLink
           v-for="(btn, index) in heroActionButtons"
+          :key="index"
           :to="btn?.disabled ? '#' : btn.to"
           :class="[btn.disabled ? 'cursor-not-allowed opacity-50' : '']"
         >

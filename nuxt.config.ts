@@ -10,6 +10,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   css: ['~/assets/css/main.css'],
+
+  plugins: [
+    '~/plugins/vue-query.client.ts'
+  ],
   vite: {
     plugins: [
       tailwindcss(),
@@ -33,6 +37,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/test-utils',
     '@nuxt/ui',
-    '@nuxt/scripts'
+    '@nuxt/scripts',
+    '@pinia/nuxt'
   ]
 })

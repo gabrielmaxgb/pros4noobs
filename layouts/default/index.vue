@@ -1,6 +1,6 @@
 <script setup lang="ts">
-// import { TOP_NAVBAR_HEIGHT } from "../constants/index";
 import { TOP_NAVBAR_HEIGHT } from "~/constants";
+import LayoutContainer from "./components/LayoutContainer.vue";
 </script>
 
 <template>
@@ -21,7 +21,9 @@ import { TOP_NAVBAR_HEIGHT } from "~/constants";
         <UIcon :name="'typcn:warning'" size="30" class="hidden lg:block" />
       </span>
       <div class="w-12/12 py-6">
+        <!-- <LayoutContainer> -->
         <slot />
+        <!-- </LayoutContainer> -->
       </div>
     </div>
   </div>

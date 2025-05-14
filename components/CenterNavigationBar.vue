@@ -32,24 +32,5 @@ const route = useRoute();
         color="primary"
       />
     </NuxtLink>
-    <!-- <NuxtLink
-      v-for="(btn, index) in navigationOptions"
-      :to="btn.to"
-      class="flex gap-4 min-w-fit"
-    >
-      <UButton
-        class="cursor-pointer text-sm"
-        color="primary"
-        :variant="route.path === btn.to ? 'solid' : 'outline'"
-      >
-        {{ btn.label }}
-      </UButton>
-      <USeparator
-        v-if="!(index === navigationOptions.length - 1)"
-        orientation="vertical"
-        class="h-8"
-        color="primary"
-      />
-    </NuxtLink> -->
   </section>
 </template>

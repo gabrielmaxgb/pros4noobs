@@ -1,26 +1,30 @@
-export const TOP_NAVBAR_HEIGHT = '60px';
+export const TOP_NAVBAR_HEIGHT = "60px";
 
-export const navigationOptions = [
-  {
-    label: "Inicio",
-    icon: "fe:beginner",
-    to: "/",
-  },
-  {
-    label: "Sobre",
-    icon: "ix:about",
-    to: "/about",
-  },
-  {
-    label: "Cadastre-se, Noob",
-    icon: "mingcute:bug-fill",
-    to: "/noob-register",
-    disabled: true,
-  },
-  {
-    label: "Seja um Pro",
-    icon: "mingcute:brackets-angle-fill",
-    to: "/pro-register",
-    disabled: true,
-  },
-]
+export interface INavigationOption {
+	label: string;
+	icon: string;
+	to: string;
+	disabled?: boolean;
+}
+export const navigationOptions: INavigationOption[] = [
+	{
+		label: "Inicio",
+		icon: "fe:beginner",
+		to: "/",
+	},
+	{
+		label: "Sobre",
+		icon: "ix:about",
+		to: "/about",
+	},
+	{
+		label: "Faça Parte",
+		icon: "mingcute:bug-fill",
+		to: "/onboarding",
+	},
+	// {
+	//   label: "Seja um Pro",
+	//   icon: "mingcute:brackets-angle-fill",
+	//   to: "/pro-register",
+	// },
+];
