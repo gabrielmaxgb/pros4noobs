@@ -1,6 +1,3 @@
-// import clientPromise from '../utils/mongo'
-import clientPromise from '../../db/mongo';
-
 export default async function seedCore() {
   // const client = await clientPromise;
   // const db = client.db('pros4noobs');

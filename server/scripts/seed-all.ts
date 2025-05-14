@@ -1,7 +1,7 @@
 import seedCore from './seed-core'
 import seedDevOnly from './seed-dev-only'
 
-async function runSeeds() {
+export default async function runSeeds() {
   console.log('🌱 Running seeds...')
 
   await seedCore()
@@ -16,8 +16,3 @@ async function runSeeds() {
   console.log('Seeding complete.')
   process.exit(0)
 }
-
-runSeeds().catch((err) => {
-  console.error('Seed error:', err)
-  process.exit(1)
-})
