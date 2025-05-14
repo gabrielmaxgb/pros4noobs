@@ -1,9 +1,9 @@
 <template>
   <div class="w-full flex flex-col items-center pt-6 pb-16">
     <section class="w-11/12 md:w-10/12 grid grid-cols-12 gap-6">
-      <div class="col-span-12 md:col-span-8 grid grid-cols-12 gap-4">
+      <div class="col-span-12 lg:col-span-8 grid grid-cols-12 gap-4">
         <Paper class="col-span-12 flex flex-col">
-          <h1 class="text-primary text-4xl font-header">Sobre o Pros4Noobs</h1>
+          <h1 class="text-primary text-4xl font-header mb-4">Sobre a Pros4Noobs</h1>
           <p>
             A pros4noobs é uma iniciativa sem fins lucrativos que conecta desenvolvedores
             experientes (pros) com pessoas que estão começando (noobs) de forma gratuita, justa e
@@ -11,13 +11,13 @@
           </p>
         </Paper>
         <Paper class="col-span-12">
-          <h1 class="font-header text-primary text-2xl">Uma lanterna?</h1>
+          <h1 class="text-primary text-2xl mb-4">Uma lanterna?</h1>
           <p class="">
             Porque o caminho para aprender a programar é escuro no começo. É cheio de dúvidas,
             decisões difíceis, caminhos que parecem não levar a lugar algum e muitos momentos de
             desânimo. A lanterna representa o que o projeto se propõe a ser:
 
-            <span class="block p-2 border-l-2 border-primary bg-info/10 my-4">
+            <span class="block p-2 border-l-2 border-primary bg-info/10 my-6">
               Um facho de luz para quem está começando, não um atalho mágico.
             </span>
 
@@ -39,7 +39,7 @@
           </ul>
         </Paper>
       </div>
-      <div class="col-span-12 md:col-span-4 h-full flex items-center justify-center">
+      <div class="col-span-12 lg:col-span-4 h-full flex items-center justify-center">
         <img
           src="/public/p4n-logo.svg"
           class=""
@@ -56,7 +56,7 @@
         experientes (<em>pros</em>).
       </p>
 
-      <p class="p-2 border-l-2 border-primary bg-info/10 my-4">
+      <p class="p-2 border-l-2 border-primary bg-info/10 my-4 mt-8">
         Nosso objetivo é simples:
         <strong>quebrar a barreira de entrada na área tech</strong> e mostrar que você não precisa
         de cursos caros ou QI para dar o primeiro push no seu repositório — só de alguém que te
@@ -65,10 +65,8 @@
       </p>
     </section>
 
-    <section class="w-11/12 md:w-10/12 my-6">
-      <h2 class="text-2xl font-semibold font-header text-primary text-center">
-        Por que existimos?
-      </h2>
+    <section class="w-11/12 md:w-10/12 my-8">
+      <h2 class="text-2xl font-semibold text-primary text-center"> Por que existimos? </h2>
       <p class="text-center">
         Porque sabemos como é começar do zero. A dúvida, o medo, o “será que sou bom o
         suficiente?”.<br />
@@ -96,8 +94,8 @@
       </ol>
     </section> -->
 
-    <section class="w-11/12 md:w-10/12 space-y-2 text-center">
-      <h2 class="text-2xl font-semibold font-header text-primary">Para quem é?</h2>
+    <section class="w-11/12 md:w-10/12 space-y-2 text-center my-8">
+      <h2 class="text-2xl font-semibold text-primary">Para quem é?</h2>
 
       <span class="block">
         <strong>Noobs:</strong> quem quer aprender programação, entrar no mercado ou ter alguém com
@@ -114,7 +112,7 @@
       class="w-full flex items-center justify-center bg-gradient-to-tl from-primary/40 via-black to-secondary/20 py-12 text-center text-neutral my-10"
     >
       <div class="flex flex-col gap-4 w-11/12 md:10/12">
-        <h2 class="text-2xl font-semibold font-header text-primary">✨ Nossos valores</h2>
+        <h2 class="text-2xl font-semibold text-primary">✨ Nossos valores</h2>
         <p>Gratuidade com propósito</p>
         <p>Mentoria com empatia</p>
         <p>Compartilhamento real, sem ego</p>
@@ -122,7 +120,7 @@
       </div>
     </section>
 
-    <section class="w-11/12 md:w-10/12 space-y-6 text-center">
+    <section class="w-11/12 md:w-10/12 space-y-6 text-center mt-8">
       <p class="text-neutral">
         Se você está começando, a gente te ajuda.<br />
         Se você já chegou lá, ajude alguém a chegar também.

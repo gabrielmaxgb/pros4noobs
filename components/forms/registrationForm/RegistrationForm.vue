@@ -21,7 +21,6 @@
     {
       step: 1,
       nextStep: 2,
-      // title: "Dados pessoais",
       description: 'Dados pessoais',
       icon: 'i-lucide-user',
       component: markRaw(UserInformation),
@@ -32,7 +31,6 @@
       prevStep: 1,
       step: 2,
       nextStep: 3,
-      // title: "Selecione seu papel",
       description: 'Selecione seu papel',
       icon: 'i-lucide-briefcase',
       component: markRaw(Role),
@@ -43,7 +41,6 @@
       prevStep: 2,
       step: 3,
       nextStep: 4,
-      // title: "Tecnologias de interesse",
       description: 'Tecnologias de interesse',
       icon: 'i-lucide-star',
       component: markRaw(Interests),
@@ -53,7 +50,6 @@
     {
       prevStep: 3,
       step: 4,
-      // title: "Sucesso",
       description: 'Sucesso',
       icon: 'i-lucide-check-circle',
       component: markRaw(Success),
@@ -135,13 +131,13 @@
     <UStepper
       :ref="'stepperCurrent'"
       :items="registrationFormStepperItems"
-      size="lg"
+      size="md"
       :disabled="true"
       class="w-full"
     >
       <template #content="{ item }">
-        <div class="w-full flex items-start justify-center mt-4">
-          <div class="w-full flex flex-col gap-6 pt-6">
+        <div class="w-full flex items-start justify-center mt-0">
+          <div class="w-full flex flex-col gap-6 pt-0">
             <component :is="item.component" />
             <div
               v-if="stepperCurrent?.hasNext"

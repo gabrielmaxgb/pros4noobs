@@ -1,7 +1,4 @@
 <script setup lang="ts">
-  // import { z } from "zod";
-  // import { ref, reactive } from "vue";
-  // import type { RadioGroupItem, StepperItem } from "@nuxt/ui";
   import RegistrationForm from '~/components/forms/registrationForm/RegistrationForm.vue';
 
   definePageMeta({
@@ -11,13 +8,27 @@
 
 <template>
   <div class="w-full flex flex-col items-center justify-start gap-6">
-    <section class="w-11/12 md:w-8/12 grid grid-cols-12 gap-6">
-      <Paper class="w-full col-span-12 md:col-span-6">
+    <section class="w-11/12 lg:w-10/12 flex flex-col gap-4">
+      <p class="text-center text-primary text-2xl md:text-4xl font-header">
+        Estamos empolgados em tê-lo aqui!
+      </p>
+      <p class="text-center text-primary text-2xl md:text-4xl font-header">
+        Para começar sua jornada na tecnologia, o primeiro passo é se cadastrar na nossa plataforma.
+      </p>
+    </section>
+    <section class="w-11/12 lg:w-10/12 flex justify-center gap-6">
+      <Paper class="w-full flex flex-col gap-8 max-w-[650px]">
         <RegistrationForm />
+        <p class="text-center">
+          Após o cadastro, você poderá acessar nossa plataforma e começar a explorar as
+          oportunidades de mentoria disponíveis.
+        </p>
+
+        <p class="text-center">
+          Lembre-se: a mentoria é um gesto de generosidade. Ao se cadastrar, você não apenas busca
+          orientação, mas também se junta a uma comunidade que valoriza a troca de conhecimento.
+        </p>
       </Paper>
-      <div class="w-full col-span-11 md:col-span-6">
-        <span>asdas</span>
-      </div>
     </section>
   </div>
 </template>

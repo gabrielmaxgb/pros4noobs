@@ -16,7 +16,7 @@
       >
         Estamos nos preparando para dar início às nossas atividades! Fique ligado!
       </span>
-      <div class="w-12/12 pt-6">
+      <div class="w-12/12 pt-8">
         <slot />
       </div>
     </div>

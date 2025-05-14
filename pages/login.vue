@@ -55,7 +55,7 @@
 </script>
 
 <template>
-  <div class="w-full flex items-start justify-center pt-4 md:pt-24">
+  <div class="w-full flex items-start justify-center pt-4 md:pt-10">
     <section class="w-11/12 md:w-10/12">
       <!-- {{ loginForm }}<br />
       {{ loginFormErrors }}<br /> -->
@@ -102,22 +102,31 @@
               type="password"
               size="xl"
               :error="loginFormErrors.password"
-              placeholder="Enter your password"
+              placeholder="Senha"
               class="w-full"
             />
             <p v-if="loginFormErrors.password" class="text-red-500 text-sm mt-1">
               {{ loginFormErrors.password }}
             </p>
           </div>
-          <div class="w-full">
+          <div class="w-full flex flex-col items-center justify-center mt-4 gap-2">
             <UButton
               type="submit"
               color="primary"
               :variant="loginFormErrors ? 'solid' : 'soft'"
               size="xl"
-              class="w-full text-center"
+              class="cursor-pointer"
             >
-              Login
+              Entrar
+            </UButton>
+            <UButton
+              type="submit"
+              color="warning"
+              :variant="'link'"
+              size="md"
+              class="w-full text-center max-w-fit cursor-pointer"
+            >
+              Esqueci a senha
             </UButton>
           </div>
         </form>

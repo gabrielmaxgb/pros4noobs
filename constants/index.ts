@@ -18,12 +18,12 @@ export const navigationOptions: INavigationOption[] = [
     to: '/about',
   },
   {
-    label: 'Faça Parte',
+    label: 'Cadastre-se',
     icon: 'mingcute:hand-2-fill',
     to: '/onboarding',
   },
   {
-    label: 'Login',
+    label: 'Entrar',
     icon: 'mingcute:login-2-fill',
     to: '/login',
   },

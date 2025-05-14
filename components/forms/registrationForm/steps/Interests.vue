@@ -19,6 +19,16 @@
     'Ruby2',
     'Go2',
   ]);
+
+  watch(
+    () => onBoardingStore.registrationForm.superBeginner,
+    (newValue) => {
+      if (newValue) {
+        onBoardingStore.registrationForm.areasOfInterest = [];
+        onBoardingStore.registrationForm.technologies = [];
+      }
+    }
+  );
 </script>
 
 <template>
@@ -26,7 +36,7 @@
     <UCheckbox
       v-model="onBoardingStore.registrationForm.superBeginner"
       label="Super Noob"
-      description="Marque esta opção se você tem interesse em aprender mais sobre a carreira na área da tecnologia, porém não tem certeza sobre a área de atuação."
+      :description="`${'Marque esta opção se você tem interesse em aprender mais sobre a carreira na área da tecnologia, porém não tem certeza sobre a área de atuação. Ao marcar esta opção, você não precisa preencher as áreas de interesse e tecnologias.'}`"
       variant="card"
       class="cursor-pointer"
     />

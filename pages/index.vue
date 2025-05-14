@@ -69,8 +69,8 @@
     isError: {{ isError }}<br /> -->
 
     <!-- Hero Section -->
-    <section class="pt-10 w-10/12 text-center space-y-8 text-gray-300">
-      <h1 class="text-5xl font-semibold font-header leading-tight text-primary">
+    <section class="pt-10 w-11/12 lg:w-10/12 text-center space-y-8 text-gray-300">
+      <h1 class="text-3xl sm:text-5xl font-semibold font-header leading-tight text-primary">
         Comece sua jornada no mundo da tecnologia com apoio de verdade.
       </h1>
 
@@ -86,14 +86,18 @@
           :to="btn?.disabled ? '#' : btn.to"
           :class="[btn.disabled ? 'cursor-not-allowed opacity-50' : '']"
         >
-          <UButton :color="btn.color as any" :variant="btn.variant as any" :disabled="btn.disabled">
+          <UButton
+            :color="btn.color as any"
+            :variant="btn.variant as any"
+            :disabled="btn.disabled"
+            size="xl"
+          >
             {{ btn.label }}
           </UButton>
         </NuxtLink>
       </div>
     </section>
 
-    <!-- Como Funciona -->
     <section class="w-10/12 text-center text-gray-300 space-y-8">
       <h2 class="text-3xl font-semibold">Como funciona</h2>
       <UStepper v-model="stepperActive" :items="stepperItems" class="w-full">
@@ -112,7 +116,7 @@
       class="w-full flex items-center justify-center bg-gradient-to-tl from-primary/40 via-black to-secondary/20 text-center space-y-6 text-neutral py-12"
     >
       <div class="w-11/12 flex flex-col gap-4">
-        <h2 class="text-3xl font-semibold">Por que fazemos isso</h2>
+        <h2 class="text-3xl font-semibold text-primary">Por que fazemos isso</h2>
         <span>Pra tornar o acesso à tecnologia mais justo e possível.</span>
         <span>Pra combater a cultura de cursos abusivos e promessas falsas.</span>
         <span>Porque mentoria é generosidade — e não produto.</span>
