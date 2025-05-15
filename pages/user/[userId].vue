@@ -1,0 +1,81 @@
+<script setup lang="ts">
+  definePageMeta({
+    middleware: 'auth',
+    layout: 'auth',
+  });
+</script>
+
+<template>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+  <p>auth</p>
+</template>
