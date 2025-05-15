@@ -1,5 +1,5 @@
-import { defineNuxtRouteMiddleware, navigateTo } from 'nuxt/app';
+import { defineNuxtRouteMiddleware, navigateTo } from "nuxt/app"
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  return navigateTo('/');
-});
+  return navigateTo('/')
+})

@@ -1,19 +1,22 @@
-@import 'tailwindcss';
-@import '@nuxt/ui';
+@import "tailwindcss";
+@import "@nuxt/ui";
 
 @theme {
-  --font-sans: 'Chakra Petch', sans-serif;
-  --font-serif: 'Gloock', serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-header: 'Staatliches', sans-serif;
-  --font-script: 'Orbitron', cursive;
+  
+  --font-sans: "Chakra Petch", sans-serif;
+--font-serif: "Gloock", serif;
+--font-mono: "JetBrains Mono", monospace;
+--font-header: "Staatliches", sans-serif;
+--font-script: "Orbitron", cursive;
 
+  /* caracas */
   /* --font-sans: "Chakra Petch", sans-serif;
 --font-serif: "Cinzel", serif;
 --font-mono: "Major Mono Display", monospace;
 --font-header: "Staatliches", sans-serif;
 --font-script: "Arizonia", cursive; */
 
+  /* hmm */
   /* --font-sans: "Asap", sans-serif;
 --font-serif: "Bitter", serif;
 --font-mono: "Zed Mono", monospace;
@@ -44,7 +47,7 @@
 --font-mono: "JetBrains Mono", monospace;
 --font-header: "Bricolage Grotesque", sans-serif;
 --font-script: "Pacifico", cursive; */
-
+  
   /* --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;

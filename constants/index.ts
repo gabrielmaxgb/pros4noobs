@@ -1,35 +1,26 @@
 export const TOP_NAVBAR_HEIGHT = '60px';
 
-export interface INavigationOption {
-  label: string;
-  icon: string;
-  to: string;
-  disabled?: boolean;
-}
-export const navigationOptions: INavigationOption[] = [
+export const navigationOptions = [
   {
-    label: 'Inicio',
-    icon: 'fe:beginner',
-    to: '/',
+    label: "Inicio",
+    icon: "fe:beginner",
+    to: "/",
   },
   {
-    label: 'Sobre',
-    icon: 'ix:about',
-    to: '/about',
+    label: "Sobre",
+    icon: "ix:about",
+    to: "/about",
   },
   {
-    label: 'Cadastre-se',
-    icon: 'mingcute:hand-2-fill',
-    to: '/onboarding',
+    label: "Cadastre-se, Noob",
+    icon: "mingcute:bug-fill",
+    to: "/noob-register",
+    disabled: true,
   },
   {
-    label: 'Entrar',
-    icon: 'mingcute:login-2-fill',
-    to: '/login',
+    label: "Seja um Pro",
+    icon: "mingcute:brackets-angle-fill",
+    to: "/pro-register",
+    disabled: true,
   },
-  // {
-  //   label: "Seja um Pro",
-  //   icon: "mingcute:brackets-angle-fill",
-  //   to: "/pro-register",
-  // },
-];
+]
