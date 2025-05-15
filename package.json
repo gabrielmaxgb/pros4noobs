@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare",
     "format": "prettier --write \"**/*.{js,ts,vue,json,css,scss,md}\"",
     "deploy:preview": "dotenv -e .env -- vercel --yes",
-    "deploy:prod": "BRANCH=$(git rev-parse --abbrev-ref HEAD) && if [ \"$BRANCH\" = \"main\" ]; then dotenv -e .env -- vercel --prod --yes; else echo '🚫 Só é permitido deployar a partir da branch main!'; exit 1; fi"
+    "deploy:prod": "BRANCH=$(git rev-parse --abbrev-ref HEAD) && if [ \"$BRANCH\" = \"main\" ]; then dotenv -e .env -- vercel --prod --yes; else echo 'Only deployments from the main branch are allowed!'; exit 1; fi"
   },
   "dependencies": {
     "@nuxt/eslint": "^1.3.0",
