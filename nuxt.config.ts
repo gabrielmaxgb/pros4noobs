@@ -1,4 +1,4 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -11,13 +11,9 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  plugins: [
-    '~/plugins/vue-query.client.ts'
-  ],
+  plugins: ['~/plugins/vue-query.client.ts'],
   vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
 
   fonts: {
@@ -26,8 +22,8 @@ export default defineNuxtConfig({
       { name: 'Gloock', provider: 'google' },
       { name: 'JetBrains Mono', provider: 'google' },
       { name: 'Staatliches', provider: 'google' },
-      { name: 'Orbitron', provider: 'google' }
-    ]
+      { name: 'Orbitron', provider: 'google' },
+    ],
   },
 
   modules: [
@@ -37,6 +33,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/test-utils',
     '@nuxt/ui',
-    '@nuxt/scripts'
-  ]
-})
+    '@nuxt/scripts',
+    '@pinia/nuxt',
+  ],
+});

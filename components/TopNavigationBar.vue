@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TOP_NAVBAR_HEIGHT, navigationOptions } from "~/constants";
+  import { TOP_NAVBAR_HEIGHT, navigationOptions } from '~/constants';
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import { TOP_NAVBAR_HEIGHT, navigationOptions } from "~/constants";
       <NuxtLink to="/">
         <div class="flex items-center">
           <img src="/public/p4n-logo.svg" class="size-8 mr-2" />
-          <div class="text-primary font-header">Pros 4 Noobs</div>
+          <div class="text-primary text-lg font-header">Pros 4 Noobs</div>
         </div>
       </NuxtLink>
       <CenterNavigationBar class="hidden lg:flex" />
