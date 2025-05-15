@@ -45,7 +45,7 @@
     if (validateLoginForm()) {
       // Aqui você pode fazer a chamada para o login
       console.log('Formulário válido, prosseguindo com o login...');
-      await navigateTo(`/user/${loginForm.value.email}`);
+      await navigateTo({ name: 'user-userId-dashboard', params: { userId: 123 } });
       // Exemplo: await login(loginForm.value);
     } else {
       return;
@@ -111,16 +111,16 @@
               color="primary"
               :variant="loginFormErrors ? 'solid' : 'soft'"
               size="xl"
-              class="cursor-pointer"
+              class="cursor-pointer w-full"
             >
-              Entrar
+              <span class="w-full"> Entrar </span>
             </UButton>
             <UButton
-              type="submit"
+              type="button"
               color="warning"
               :variant="'link'"
               size="md"
-              class="w-full text-center max-w-fit cursor-pointer"
+              class="max-w-fit cursor-pointer"
             >
               Esqueci a senha
             </UButton>

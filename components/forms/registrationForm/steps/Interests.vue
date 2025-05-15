@@ -1,6 +1,6 @@
 <script setup lang="ts">
   const onBoardingStore = useOnBoardingStore();
-  const areasOfInterestItems = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
+  // const areasOfInterestItems = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
   const technologiesItems = ref([
     'JavaScript',
     'TypeScript',
@@ -24,7 +24,7 @@
     () => onBoardingStore.registrationForm.superBeginner,
     (newValue) => {
       if (newValue) {
-        onBoardingStore.registrationForm.areasOfInterest = [];
+        // onBoardingStore.registrationForm.areasOfInterest = [];
         onBoardingStore.registrationForm.technologies = [];
       }
     }
@@ -42,7 +42,7 @@
     />
   </div>
 
-  <div>
+  <!-- <div>
     <USelectMenu
       v-model="onBoardingStore.registrationForm.areasOfInterest"
       multiple
@@ -63,7 +63,7 @@
     >
       {{ onBoardingStore.registrationFormErrors.areasOfInterest }}
     </p>
-  </div>
+  </div> -->
 
   <div>
     <USelectMenu
