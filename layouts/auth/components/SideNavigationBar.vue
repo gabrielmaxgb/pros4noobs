@@ -46,27 +46,44 @@
 
 <template>
   <div class="bg-internal-black/70 w-[310px] h-full flex flex-col items-start justify-between p-6">
-    <section class="flex flex-col gap-2">
+    <section class="w-full flex flex-col gap-2">
       <UButton
         v-for="(item, index) in sideNavigationBar.top"
         :key="index"
-        class="flex items-center gap-2 text-neutral-100 hover:text-primary transition-colors duration-200 cursor-pointer text-lg"
-        :class="{ 'text-primary': router.currentRoute.value.name === item.routeName }"
-        variant="link"
+        class="cursor-pointer"
+        :class="{
+          '': router.currentRoute.value.name === item.routeName,
+        }"
+        :variant="router.currentRoute.value.name === item.routeName ? 'soft' : 'ghost'"
         :icon="item.icon"
         size="xl"
-        color="neutral"
         @click="() => handleSideBarItemClick(item)"
       >
-        <!-- item.to: {{ item.to }} -->
         <span>{{ item.label }}</span>
       </UButton>
     </section>
-    <section>
+    <section class="w-full flex flex-col gap-2">
+      <UModal>
+        <UButton class="w-full flex items-center gap-6 cursor-pointer" variant="ghost" size="xl">
+          <div class="flex items-center gap-2" variant="ghost" size="xl">
+            <UIcon name="emojione-v1:diamond-with-a-dot" size="20" />
+            <span>34</span>
+          </div>
+          <div class="flex items-center gap-2" variant="ghost" size="xl">
+            <UIcon name="fluent-color:coin-multiple-48" size="20" />
+            <span>11</span>
+          </div>
+        </UButton>
+
+        <template #content>
+          <Placeholder class="h-48 m-4" />
+        </template>
+      </UModal>
+
       <UButton
-        class="flex items-center gap-2 text-neutral-100 hover:text-warning transition-colors duration-200 cursor-pointer text-lg"
+        class="cursor-pointer"
         variant="link"
-        size="lg"
+        size="xl"
         @click.prevent="() => handleLogoutClick()"
       >
         <UIcon name="material-symbols:logout" size="20" />
