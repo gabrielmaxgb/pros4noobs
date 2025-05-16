@@ -4,7 +4,7 @@
 
 <template>
   <div
-    class="w-full max-w-full sticky flex items-center justify-center top-0 z-20 bg-internal-black/60 backdrop-blur-sm"
+    class="w-full max-w-full sticky flex items-center justify-center top-0 z-20 bg-internal-black"
     :style="{ height: TOP_NAVBAR_HEIGHT }"
   >
     <div class="w-11/12 lg:w-10/12 flex items-center justify-between py-2">

@@ -1,20 +1,20 @@
 import User from '../../models/user';
 import { defineEventHandler, readBody } from 'h3';
 import GeneralConfiguration from '~/server/models/configurations';
-import { CreateUserDto, CreateUserDtoSchema as schema, UserModel, UserRole } from '~/shared/users';
+import { type TCreateUser_DTO, type IUserModel, createUserSchema } from '~/shared/user';
 
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
 
     // Validate the request body against the schema
-    const parsedBody = schema.safeParse(body);
+    const parsedBody = createUserSchema.safeParse(body);
     if (!parsedBody.success) {
       return { status: 400, message: 'Invalid input', errors: parsedBody.error.errors };
     }
 
     // Extract the validated data
-    const data = parsedBody.data as CreateUserDto;
+    const data = parsedBody.data as TCreateUser_DTO;
 
     // Check if the user already exists
     const existingUser = await User.findOne({ email: data.email });
@@ -23,12 +23,10 @@ export default defineEventHandler(async (event) => {
     }
 
     const techsConfig = await GeneralConfiguration.findOne({
-      key: "technologies",
+      key: 'technologies',
     });
 
-    const techs =
-      techsConfig?.value?.split(",")
-        .map((tech: string) => tech.trim()) || [];
+    const techs = techsConfig?.value?.split(',').map((tech: string) => tech.trim()) || [];
 
     if (!data.technologies.every((tech) => techs.includes(tech))) {
       return { status: 400, message: 'Invalid technology selected.' };
@@ -36,25 +34,28 @@ export default defineEventHandler(async (event) => {
 
     // Create a new user
     const newUser = new User({
-      name: body.name,
-      email: body.email,
-      password: body.password, // Note: Hash the password in production
-      technologies: body.technologies,
-      initialRoles: body.initialRoles,
+      name: data.name,
+      email: data.email,
+      password: data.password, // Note: Hash the password in production
+      technologies: data.technologies,
+      initialRole: data.startRole,
+      startedAsSuperBeginner: data.startedAsSuperBeginner,
     });
 
     await newUser.save();
 
-    const model: UserModel = {
+    const model: IUserModel = {
       id: newUser._id.toString(),
       name: newUser.name,
       email: newUser.email,
       technologies: newUser.technologies,
-      initialRoles: newUser.initialRoles.map((role: string) => role as UserRole),
+      initialRole: newUser.initialRole,
+      superNoob: newUser.startedAsSuperBeginner,
+      // initialRoles: newUser.initialRoles.map((role: string) => role as UserRole),
     };
 
     return { status: 201, message: 'User created successfully.', user: newUser };
   } catch (error: any) {
-    return { status: 500, message: 'Internal server error.', error: error.message };
+    return { status: 500, message: 'Internal server error.', error: error?.message };
   }
 });
