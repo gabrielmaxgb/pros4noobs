@@ -74,7 +74,10 @@
       case 3:
         return form.superBeginner
           ? false
-          : !(form.technologies.length > 0 && form.areasOfInterest.length > 0);
+          : !(
+              (form.technologies.length > 0)
+              // && form.areasOfInterest.length > 0
+            );
       default:
         return false;
     }

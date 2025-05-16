@@ -8,9 +8,10 @@
   <section class="hidden max-w-fit md:flex items-center gap-4 overflow-x-scroll">
     <NuxtLink
       v-for="(btn, index) in navigationOptions"
+      :key="index"
       :to="btn?.disabled ? '#' : btn.to"
-      @click.prevent="btn?.disabled && console.log('Disabled')"
       :class="['flex gap-4 min-w-fit', btn.disabled ? 'cursor-not-allowed opacity-50' : '']"
+      @click.prevent="btn?.disabled && console.log('Disabled')"
     >
       <UButton
         class="cursor-pointer text-sm"
