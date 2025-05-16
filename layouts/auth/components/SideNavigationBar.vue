@@ -31,7 +31,7 @@
     bottom: [],
   };
 
-  const router = useRouter();
+  const route = useRoute();
   const { logout } = useLogout();
 
   const handleSideBarItemClick = (item: TSidenavigationBar_Item) => {
@@ -45,16 +45,16 @@
 </script>
 
 <template>
-  <div class="bg-internal-black/70 w-[310px] h-full flex flex-col items-start justify-between p-6">
+  <div class="bg-internal-black w-[310px] h-full flex flex-col items-start justify-between p-6">
     <section class="w-full flex flex-col gap-2">
       <UButton
         v-for="(item, index) in sideNavigationBar.top"
         :key="index"
         class="cursor-pointer"
         :class="{
-          '': router.currentRoute.value.name === item.routeName,
+          '': route.name === item.routeName,
         }"
-        :variant="router.currentRoute.value.name === item.routeName ? 'soft' : 'ghost'"
+        :variant="route.name === item.routeName ? 'soft' : 'ghost'"
         :icon="item.icon"
         size="xl"
         @click="() => handleSideBarItemClick(item)"
@@ -63,7 +63,7 @@
       </UButton>
     </section>
     <section class="w-full flex flex-col gap-2">
-      <UModal>
+      <UModal :overlay="false" class="w-[100px]" title="Modal" size="sm">
         <UButton class="w-full flex items-center gap-6 cursor-pointer" variant="ghost" size="xl">
           <div class="flex items-center gap-2" variant="ghost" size="xl">
             <UIcon name="emojione-v1:diamond-with-a-dot" size="20" />
@@ -75,9 +75,9 @@
           </div>
         </UButton>
 
-        <template #content>
-          <Placeholder class="h-48 m-4" />
-        </template>
+        <!-- <template #content> content </template> -->
+
+        <template #body>Content</template>
       </UModal>
 
       <UButton
