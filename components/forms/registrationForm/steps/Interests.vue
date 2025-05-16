@@ -1,6 +1,8 @@
 <script setup lang="ts">
+  import { useQuery } from '@tanstack/vue-query';
+  import { queries } from '~/queries';
+
   const onBoardingStore = useOnBoardingStore();
-  // const areasOfInterestItems = ref(['Backlog', 'Todo', 'In Progress', 'Done']);
   const technologiesItems = ref([
     'JavaScript',
     'TypeScript',
@@ -19,6 +21,12 @@
     'Ruby2',
     'Go2',
   ]);
+
+  const { data: technologiesList } = useQuery({
+    ...queries.user.getUserRegistrationTechnologies(),
+    staleTime: Infinity,
+    enabled: true,
+  });
 
   watch(
     () => onBoardingStore.registrationForm.superBeginner,
@@ -42,28 +50,7 @@
     />
   </div>
 
-  <!-- <div>
-    <USelectMenu
-      v-model="onBoardingStore.registrationForm.areasOfInterest"
-      multiple
-      placeholder="Selecione suas áreas de interesse"
-      :items="areasOfInterestItems"
-      class="w-full h-10 cursor-pointer"
-      variant="soft"
-      color="neutral"
-      size="xl"
-      :disabled="
-        onBoardingStore.registrationForm.startRole === 'noob' &&
-        onBoardingStore.registrationForm.superBeginner
-      "
-    />
-    <p
-      v-if="onBoardingStore.registrationFormErrors.areasOfInterest"
-      class="text-red-500 text-sm mt-1"
-    >
-      {{ onBoardingStore.registrationFormErrors.areasOfInterest }}
-    </p>
-  </div> -->
+  technologiesList: {{ technologiesList }} <br />
 
   <div>
     <USelectMenu
