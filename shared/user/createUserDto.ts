@@ -1,6 +1,7 @@
 import { z } from 'zod';
+import { USER_ROLES } from './userModel';
 
-export const userRoleSchema = z.enum(['noob', 'pro']);
+export const userRoleSchema = z.enum(USER_ROLES);
 
 // Define a schema for user creation
 export const createUserSchema = z.object({
