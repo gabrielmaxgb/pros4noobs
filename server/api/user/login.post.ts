@@ -1,5 +1,6 @@
-import { defineEventHandler, readBody } from 'h3';
+import { defineEventHandler, readBody, setCookie } from 'h3';
 import User from '~/server/models/user';
+import { generateToken } from '~/server/auth/tokens';
 import {
   loginDtoSchema,
   LoginDto,
@@ -39,6 +40,14 @@ export default defineEventHandler(async (event) => {
         roles: user.roles.map((role: string) => role as 'noob' | 'pro'),
         superNoob: user.startedAsSuperBeginner,
     };
+
+    const token = generateToken(model.id);
+    setCookie(event, 'token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict', 
+        maxAge: 60 * 60 * 24, // 1 day
+    });
 
     return { status: 201, message: 'Logged in successfully.', user: model };
   } catch (error: any) {
