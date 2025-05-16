@@ -5,6 +5,7 @@
 
   definePageMeta({
     layout: false,
+    middleware: 'block-route',
   });
 
   type TLoginForm = zType.infer<typeof loginFormSchema>;

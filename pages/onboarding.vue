@@ -2,7 +2,7 @@
   import RegistrationForm from '~/components/forms/registrationForm/RegistrationForm.vue';
 
   definePageMeta({
-    // middleware: "block-route",
+    middleware: 'block-route',
   });
 </script>
 

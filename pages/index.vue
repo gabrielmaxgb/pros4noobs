@@ -3,7 +3,6 @@
     label: string;
     to: string;
     variant: string;
-    color: string;
     disabled: boolean;
   }
 
@@ -36,8 +35,7 @@
       label: 'Faça parte dessa história',
       to: '/onboarding',
       variant: 'outline',
-      color: 'primary',
-      disabled: false,
+      disabled: true,
     },
   ];
 
@@ -87,10 +85,11 @@
           :class="[btn.disabled ? 'cursor-not-allowed opacity-50' : '']"
         >
           <UButton
-            :color="btn.color as any"
+            class="cursor-pointer"
+            size="xl"
+            color="primary"
             :variant="btn.variant as any"
             :disabled="btn.disabled"
-            size="xl"
           >
             {{ btn.label }}
           </UButton>
@@ -161,7 +160,10 @@
       <p class="italic text-xl">Se você quer ensinar, cobre. Se quer ajudar, doe.</p>
       <p class="text-lg text-neutral">pros4noobs — um projeto de código e consciência.</p>
 
-      <p class="font-script text-sm text-neutral mt-6">Powered by Wizhat</p>
+      <p class="font-script text-sm text-neutral mt-6">
+        Powered by
+        <span class="text-warning font-semibold">Wizhat</span>
+      </p>
     </footer>
   </div>
 </template>
