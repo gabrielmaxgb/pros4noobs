@@ -1,23 +1,14 @@
 import type { z as zType } from 'zod';
-import { z } from 'zod';
+import type { createUserSchema } from '~/shared/user/createUserDto';
 
-export type TRegistrationForm = zType.infer<typeof registrationFormSchema>;
-
-export const registrationFormSchema = z.object({
-  name: z.string().min(2, 'Nome deve ter pelo menos 2 caracteres'),
-  email: z.string().email('Email inválido'),
-  superBeginner: z.boolean(),
-  areasOfInterest: z.array(z.string()).default([]),
-  technologies: z.array(z.string()).default([]),
-  startRole: z.enum(['noob', 'pro']),
-});
+export type TRegistrationForm = zType.infer<typeof createUserSchema>;
 
 const REGISTRATION_FORM_DEFAULT: TRegistrationForm = {
   name: '',
   email: '',
-  superBeginner: false,
-  areasOfInterest: [],
+  startedAsSuperBeginner: false,
   technologies: [],
+  password: '',
   startRole: 'noob',
 };
 
@@ -25,9 +16,9 @@ export const useOnBoardingStore = defineStore('onBoardingStore', () => {
   const registrationForm = reactive<TRegistrationForm>({
     name: '',
     email: '',
-    superBeginner: false,
-    areasOfInterest: [],
+    startedAsSuperBeginner: false,
     technologies: [],
+    password: '',
     startRole: 'noob',
   });
   const registrationFormErrors = reactive<Partial<Record<keyof TRegistrationForm, string>>>({});
@@ -35,9 +26,9 @@ export const useOnBoardingStore = defineStore('onBoardingStore', () => {
   const reset = () => {
     registrationForm.name = REGISTRATION_FORM_DEFAULT.name;
     registrationForm.email = REGISTRATION_FORM_DEFAULT.email;
-    registrationForm.superBeginner = REGISTRATION_FORM_DEFAULT.superBeginner;
-    registrationForm.areasOfInterest = REGISTRATION_FORM_DEFAULT.areasOfInterest;
+    registrationForm.startedAsSuperBeginner = REGISTRATION_FORM_DEFAULT.startedAsSuperBeginner;
     registrationForm.technologies = REGISTRATION_FORM_DEFAULT.technologies;
+    registrationForm.password = REGISTRATION_FORM_DEFAULT.password;
     registrationForm.startRole = REGISTRATION_FORM_DEFAULT.startRole;
   };
 
