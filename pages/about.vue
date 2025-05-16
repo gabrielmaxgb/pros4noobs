@@ -109,7 +109,7 @@
     </section>
 
     <section
-      class="w-full flex items-center justify-center bg-gradient-to-tl from-primary/40 via-black to-secondary/20 py-12 text-center text-neutral my-10"
+      class="w-full flex items-center justify-center bg-internal-black py-12 text-center text-neutral my-10"
     >
       <div class="flex flex-col gap-4 w-11/12 md:10/12">
         <h2 class="text-2xl font-semibold text-primary">✨ Nossos valores</h2>
