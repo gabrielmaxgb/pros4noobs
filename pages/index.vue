@@ -3,7 +3,7 @@
     label: string;
     to: string;
     variant: string;
-    disabled: boolean;
+    disabled?: boolean;
   }
 
   interface IStepperItem {
@@ -35,7 +35,7 @@
       label: 'Faça parte dessa história',
       to: '/onboarding',
       variant: 'outline',
-      disabled: true,
+      // disabled: true,
     },
   ];
 

@@ -21,12 +21,12 @@ export const navigationOptions: INavigationOption[] = [
     label: 'Cadastre-se',
     icon: 'mingcute:hand-2-fill',
     to: '/onboarding',
-    disabled: true,
+    // disabled: true,
   },
   {
     label: 'Entrar',
     icon: 'mingcute:login-2-fill',
     to: '/login',
-    disabled: true,
+    // disabled: true,
   },
 ];
