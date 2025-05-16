@@ -27,9 +27,4 @@ export const navigationOptions: INavigationOption[] = [
     icon: 'mingcute:login-2-fill',
     to: '/login',
   },
-  // {
-  //   label: "Seja um Pro",
-  //   icon: "mingcute:brackets-angle-fill",
-  //   to: "/pro-register",
-  // },
 ];

@@ -7,7 +7,7 @@
 </script>
 
 <template>
-  <div class="w-full flex flex-col items-center justify-start gap-6">
+  <div class="w-full flex flex-col items-center justify-start gap-10">
     <section class="w-11/12 lg:w-10/12 flex flex-col gap-4">
       <p class="text-center text-primary text-2xl md:text-4xl font-header">
         Estamos empolgados em tê-lo aqui!
