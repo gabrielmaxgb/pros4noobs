@@ -5,7 +5,9 @@
   import Role from './steps/Role.vue';
   import Success from './steps/Success.vue';
   import type { StepperItem } from '@nuxt/ui';
-  import { useOnBoardingStore } from '~/stores/onBoardingStore';
+  import { useOnboardingStore } from '~/stores/onboardingStore';
+  import { createUserSchema } from '~/shared/user';
+  import Password from './steps/Password.vue';
 
   interface StepperRef {
     next: () => void;
@@ -15,7 +17,7 @@
     hasPrev: Ref<boolean>;
   }
   const stepperCurrent = useTemplateRef<StepperRef>('stepperCurrent');
-  const onBoardingStore = useOnBoardingStore();
+  const onboardingStore = useOnboardingStore();
   const isFormSubmittionLoading = ref(false);
   const registrationFormStepperItems = ref<StepperItem[]>([
     {
@@ -45,11 +47,21 @@
       icon: 'i-lucide-star',
       component: markRaw(Interests),
       backButtonLabel: 'Voltar',
-      nextButtonLabel: 'Concluir',
+      nextButtonLabel: 'Próximo',
     },
     {
       prevStep: 3,
       step: 4,
+      nextStep: 5,
+      description: 'Senha',
+      icon: 'i-lucide-lock',
+      component: markRaw(Password),
+      backButtonLabel: 'Voltar',
+      nextButtonLabel: 'Concluir',
+    },
+    {
+      prevStep: 5,
+      step: 6,
       description: 'Sucesso',
       icon: 'i-lucide-check-circle',
       component: markRaw(Success),
@@ -64,7 +76,7 @@
     if (!stepperCurrent?.value?.hasNext) {
       return true;
     }
-    const form = onBoardingStore.registrationForm;
+    const form = onboardingStore.registrationForm;
 
     switch (currentStep) {
       case 1:
@@ -72,7 +84,7 @@
       case 2:
         return !form.startRole;
       case 3:
-        return form.superBeginner
+        return form.startedAsSuperBeginner
           ? false
           : !(
               (form.technologies.length > 0)
@@ -84,27 +96,75 @@
   };
 
   const handleNextStepClick = (item: StepperItem) => {
-    const result = registrationFormSchema.safeParse(onBoardingStore.registrationForm);
+    console.log('item', item);
+    // const form = onboardingStore.registrationForm;
+    onboardingStore.registrationFormErrors = {};
 
+    let validationSchema;
+    switch (item.step) {
+      case 1:
+        validationSchema = createUserSchema.pick({ name: true, email: true });
+        break;
+      case 2:
+        validationSchema = createUserSchema.pick({ startRole: true });
+        break;
+      case 3:
+        validationSchema = createUserSchema.pick({
+          technologies: true,
+          startedAsSuperBeginner: true,
+        });
+        break;
+      case 4:
+        validationSchema = createUserSchema.pick({ password: true });
+        break;
+      default:
+        validationSchema = createUserSchema;
+    }
+
+    const result = validationSchema.safeParse(onboardingStore.registrationForm);
     if (!result.success) {
       result.error.issues.forEach((issue) => {
         const field = issue.path[0] as keyof TRegistrationForm;
-        onBoardingStore.registrationFormErrors[field] = issue.message;
+        onboardingStore.registrationFormErrors[field] = issue.message;
       });
       return;
     }
 
-    onBoardingStore.registrationFormErrors = {};
-
+    console.log('deu bom');
     if (item.step === registrationFormStepperItems.value.length - 1) {
       handleSubmitRegistration();
     } else {
       stepperCurrent?.value?.next();
     }
   };
+  // ... existing code ...
+
+  // const handleNextStepClick = (item: StepperItem) => {
+  //   console.log('item', item);
+
+  //   const result = createUserSchema.safeParse(onboardingStore.registrationForm);
+
+  //   console.log('result', result);
+
+  //   if (!result.success) {
+  //     result.error.issues.forEach((issue) => {
+  //       const field = issue.path[0] as keyof TRegistrationForm;
+  //       onboardingStore.registrationFormErrors[field] = issue.message;
+  //     });
+  //     return;
+  //   }
+
+  //   onboardingStore.registrationFormErrors = {};
+
+  //   if (item.step === registrationFormStepperItems.value.length - 1) {
+  //     handleSubmitRegistration();
+  //   } else {
+  //     stepperCurrent?.value?.next();
+  //   }
+  // };
 
   const handleRestartRegistrationFormClick = () => {
-    onBoardingStore.reset();
+    onboardingStore.reset();
     registrationFormStepperItems.value.forEach(() => stepperCurrent.value?.prev());
   };
 
@@ -122,14 +182,14 @@
   };
 
   onBeforeUnmount(() => {
-    onBoardingStore.registrationFormErrors = {};
-    onBoardingStore.reset();
+    onboardingStore.registrationFormErrors = {};
+    onboardingStore.reset();
   });
 </script>
 
 <template>
-  <!-- onBoadingStore: {{ onBoardingStore.registrationForm }}<br />
-  onBoadingStoreErrors: {{ onBoardingStore.registrationFormErrors }}<br /> -->
+  onBoadingStore: {{ onboardingStore.registrationForm }}<br />
+  onBoadingStoreErrors: {{ onboardingStore.registrationFormErrors }}<br />
   <form class="w-full flex flex-col" novalidate @submit.prevent="handleSubmitRegistration">
     <UStepper
       :ref="'stepperCurrent'"
@@ -159,6 +219,7 @@
               <!-- item.step: {{ item.step }}<br /> -->
               <UButton
                 class="cursor-pointer text-base"
+                type="button"
                 color="primary"
                 :variant="isNextButtonDisabled(item.step) ? 'link' : 'solid'"
                 size="xl"
