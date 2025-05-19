@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import RegistrationForm from '~/components/forms/registrationForm/RegistrationForm.vue';
+  import RegistrationForm from '~/components/public/forms/registrationForm/RegistrationForm.vue';
 
   definePageMeta({
     // middleware: 'block-route',

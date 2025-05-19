@@ -2,7 +2,7 @@
   import { useQuery } from '@tanstack/vue-query';
   import { queries } from '~/queries';
 
-  const onBoardingStore = useOnBoardingStore();
+  const onboardingStore = useOnboardingStore();
   const technologiesItems = ref([
     'JavaScript',
     'TypeScript',
@@ -29,20 +29,20 @@
   });
 
   watch(
-    () => onBoardingStore.registrationForm.startedAsSuperBeginner,
+    () => onboardingStore.registrationForm.startedAsSuperBeginner,
     (newValue) => {
       if (newValue) {
-        // onBoardingStore.registrationForm.areasOfInterest = [];
-        onBoardingStore.registrationForm.technologies = [];
+        // onboardingStore.registrationForm.areasOfInterest = [];
+        onboardingStore.registrationForm.technologies = [];
       }
     }
   );
 </script>
 
 <template>
-  <div v-if="onBoardingStore.registrationForm.startRole === 'noob'">
+  <div v-if="onboardingStore.registrationForm.startRole === 'noob'">
     <UCheckbox
-      v-model="onBoardingStore.registrationForm.startedAsSuperBeginner"
+      v-model="onboardingStore.registrationForm.startedAsSuperBeginner"
       label="Super Noob"
       :description="`${'Marque esta opção se você tem interesse em aprender mais sobre a carreira na área da tecnologia, porém não tem certeza sobre a área de atuação. Ao marcar esta opção, você não precisa preencher as áreas de interesse e tecnologias.'}`"
       variant="card"
@@ -54,7 +54,7 @@
 
   <div>
     <USelectMenu
-      v-model="onBoardingStore.registrationForm.technologies"
+      v-model="onboardingStore.registrationForm.technologies"
       multiple
       placeholder="Tecnologias de interesse"
       :items="technologiesItems"
@@ -63,12 +63,12 @@
       color="neutral"
       size="xl"
       :disabled="
-        onBoardingStore.registrationForm.startRole === 'noob' &&
-        onBoardingStore.registrationForm.startedAsSuperBeginner
+        onboardingStore.registrationForm.startRole === 'noob' &&
+        onboardingStore.registrationForm.startedAsSuperBeginner
       "
     />
-    <p v-if="onBoardingStore.registrationFormErrors.technologies" class="text-red-500 text-sm mt-1">
-      {{ onBoardingStore.registrationFormErrors.technologies }}
+    <p v-if="onboardingStore.registrationFormErrors.technologies" class="text-red-500 text-sm mt-1">
+      {{ onboardingStore.registrationFormErrors.technologies }}
     </p>
   </div>
 </template>
