@@ -2,7 +2,7 @@
   const props = withDefaults(
     defineProps<{
       title: string;
-      description: string;
+      subtitle: string;
     }>(),
     {}
   );
@@ -11,6 +11,6 @@
 <template>
   <Paper class="w-full flex flex-col rounded-md p-6">
     <h1 class="font-header text-2xl text-primary">{{ props.title }}</h1>
-    <p class="">{{ props.description }}</p>
+    <p class="">{{ props.subtitle }}</p>
   </Paper>
 </template>

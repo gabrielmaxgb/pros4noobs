@@ -6,6 +6,13 @@ export default defineNuxtConfig({
     MONGODB_URI: process.env.MONGODB_URI,
   },
 
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
+
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 

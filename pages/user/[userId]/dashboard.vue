@@ -5,6 +5,11 @@
   definePageMeta({
     middleware: 'auth',
     layout: 'auth',
+    props: {
+      pageTitle: 'Dashboard',
+      pageDescription:
+        'Resumo do seu perfil, suas mentorias e mais detalhes sobre sua jornada com a Pros4Noobs',
+    },
   });
 </script>
 
@@ -12,7 +17,7 @@
   <PageContainer>
     <PageHeader
       title="Dashboard"
-      description="Aqui você pode ver o resumo do seu perfil, suas mentorias e mais detalhes sobre sua jornada com a Pros4Noobs"
+      subtitle="Resumo do seu perfil, suas mentorias e mais detalhes sobre sua jornada com a Pros4Noobs"
     />
   </PageContainer>
 </template>

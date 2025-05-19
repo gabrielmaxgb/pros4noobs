@@ -16,12 +16,12 @@
     {
       title: 'Cadastre-se',
       content: 'Preencha um formulário simples como noob ou pro.',
-      icon: 'i-lucide-user-plus',
+      icon: 'lucide:user-round-plus',
     },
     {
       title: 'Fazemos o match',
       content: 'Conectamos iniciantes com mentores de forma justa e intencional.',
-      icon: 'i-lucide-handshake',
+      icon: 'lucide:shield-user',
     },
     {
       title: 'Mentoria de verdade',
