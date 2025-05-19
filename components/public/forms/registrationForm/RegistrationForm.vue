@@ -5,7 +5,7 @@
   import Role from './steps/Role.vue';
   import Success from './steps/Success.vue';
   import type { StepperItem } from '@nuxt/ui';
-  import { useOnBoardingStore } from '~/stores/onBoardingStore';
+  import { useOnboardingStore } from '~/stores/onboardingStore';
   import { createUserSchema } from '~/shared/user';
 
   interface StepperRef {
@@ -16,7 +16,7 @@
     hasPrev: Ref<boolean>;
   }
   const stepperCurrent = useTemplateRef<StepperRef>('stepperCurrent');
-  const onBoardingStore = useOnBoardingStore();
+  const onBoardingStore = useOnboardingStore();
   const isFormSubmittionLoading = ref(false);
   const registrationFormStepperItems = ref<StepperItem[]>([
     {

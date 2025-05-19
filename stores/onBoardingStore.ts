@@ -12,7 +12,7 @@ const REGISTRATION_FORM_DEFAULT: TRegistrationForm = {
   startRole: 'noob',
 };
 
-export const useOnBoardingStore = defineStore('onBoardingStore', () => {
+export const useOnboardingStore = defineStore('onboardingStore', () => {
   const registrationForm = reactive<TRegistrationForm>({
     name: '',
     email: '',

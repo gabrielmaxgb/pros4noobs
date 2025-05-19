@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type { RadioGroupItem } from '@nuxt/ui';
 
-  const onBoardingStore = useOnBoardingStore();
+  const onboardingStore = useOnboardingStore();
   const startRoleItems = ref<RadioGroupItem[]>([
     {
       label: 'Pro',
@@ -21,7 +21,7 @@
 <template>
   <div>
     <URadioGroup
-      v-model="onBoardingStore.registrationForm.startRole"
+      v-model="onboardingStore.registrationForm.startRole"
       color="primary"
       default-value="pro"
       orientation="horizontal"
@@ -30,8 +30,8 @@
       :size="'lg'"
       class="!cursor-pointer"
     />
-    <p v-if="onBoardingStore.registrationFormErrors.startRole" class="text-red-500 text-sm mt-1">
-      {{ onBoardingStore.registrationFormErrors.startRole }}
+    <p v-if="onboardingStore.registrationFormErrors.startRole" class="text-red-500 text-sm mt-1">
+      {{ onboardingStore.registrationFormErrors.startRole }}
     </p>
   </div>
 </template>
