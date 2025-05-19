@@ -8,6 +8,16 @@ export default defineNuxtPlugin((nuxtApp) => {
   });
 });
 
+// -----------
+
+// import { VueQueryPlugin } from '@tanstack/vue-query';
+
+// export default defineNuxtPlugin((nuxtApp) => {
+//   nuxtApp.vueApp.use(VueQueryPlugin);
+// });
+
+// -----------
+
 // import type { DehydratedState, VueQueryPluginOptions } from '@tanstack/vue-query';
 // import { VueQueryPlugin, QueryClient, hydrate, dehydrate } from '@tanstack/vue-query';
 // // Nuxt 3 app aliases

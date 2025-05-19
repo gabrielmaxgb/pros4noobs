@@ -42,29 +42,6 @@
     />
   </div>
 
-  <!-- <div>
-    <USelectMenu
-      v-model="onBoardingStore.registrationForm.areasOfInterest"
-      multiple
-      placeholder="Selecione suas áreas de interesse"
-      :items="areasOfInterestItems"
-      class="w-full h-10 cursor-pointer"
-      variant="soft"
-      color="neutral"
-      size="xl"
-      :disabled="
-        onBoardingStore.registrationForm.startRole === 'noob' &&
-        onBoardingStore.registrationForm.superBeginner
-      "
-    />
-    <p
-      v-if="onBoardingStore.registrationFormErrors.areasOfInterest"
-      class="text-red-500 text-sm mt-1"
-    >
-      {{ onBoardingStore.registrationFormErrors.areasOfInterest }}
-    </p>
-  </div> -->
-
   <div>
     <USelectMenu
       v-model="onBoardingStore.registrationForm.technologies"

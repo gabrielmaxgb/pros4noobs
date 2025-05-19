@@ -1,5 +1,17 @@
+<script setup lang="ts">
+  // import { useQuery } from '@tanstack/vue-query';
+  // import { queries } from '~/queries';
+
+  // const { data: technologiesList } = useQuery({
+  //   ...queries.user.getUserRegistrationTechnologies(),
+  //   staleTime: Infinity,
+  //   enabled: true,
+  // });
+</script>
+
 <template>
   <div class="w-full flex flex-col items-center pt-6 pb-16">
+    <!-- technologiesList: {{ technologiesList }} <br /> -->
     <section class="w-11/12 md:w-10/12 grid grid-cols-12 gap-6">
       <div class="col-span-12 lg:col-span-8 grid grid-cols-12 gap-4">
         <Paper class="col-span-12 flex flex-col">
@@ -131,5 +143,3 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts"></script>
