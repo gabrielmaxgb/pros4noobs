@@ -22,7 +22,7 @@
     'Go2',
   ]);
 
-  const { data: technologiesList } = useQuery({
+  const { data: technologiesList, isLoading: isTechnologiesListLoading } = useQuery({
     ...queries.user.getUserRegistrationTechnologies(),
     staleTime: Infinity,
     enabled: true,
@@ -57,11 +57,12 @@
       v-model="onboardingStore.registrationForm.technologies"
       multiple
       placeholder="Tecnologias de interesse"
-      :items="technologiesItems"
+      :items="technologiesList"
       class="w-full h-10 cursor-pointer"
       variant="soft"
       color="neutral"
       size="xl"
+      :loading="isTechnologiesListLoading"
       :disabled="
         onboardingStore.registrationForm.startRole === 'noob' &&
         onboardingStore.registrationForm.startedAsSuperBeginner

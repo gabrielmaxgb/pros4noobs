@@ -1,14 +1,13 @@
 <script setup lang="ts">
   import { markRaw } from 'vue';
   import UserInformation from './steps/UserInformation.vue';
-  import Interests from './steps/Interests.client.vue';
   import Role from './steps/Role.vue';
   import Success from './steps/Success.vue';
   import type { StepperItem } from '@nuxt/ui';
-  import { useOnboardingStore } from '~/stores/onboardingStore';
   import { createUserSchema } from '~/shared/user';
   import { base_createUserSchema } from '~/shared/user/createUserDto';
   import Password from './steps/Password.vue';
+  import Interests from './steps/Interests.vue';
 
   interface StepperRef {
     next: () => void;
