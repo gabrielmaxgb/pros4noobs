@@ -1,11 +1,12 @@
 <script setup lang="ts">
   import { markRaw } from 'vue';
   import UserInformation from './steps/UserInformation.vue';
-  import Interests from './steps/Interests.vue';
+  import Interests from './steps/Interests.client.vue';
   import Role from './steps/Role.vue';
   import Success from './steps/Success.vue';
   import type { StepperItem } from '@nuxt/ui';
   import { useOnBoardingStore } from '~/stores/onBoardingStore';
+  import { createUserSchema } from '~/shared/user';
 
   interface StepperRef {
     next: () => void;
@@ -72,7 +73,7 @@
       case 2:
         return !form.startRole;
       case 3:
-        return form.superBeginner
+        return form.startedAsSuperBeginner
           ? false
           : !(
               (form.technologies.length > 0)
@@ -84,7 +85,7 @@
   };
 
   const handleNextStepClick = (item: StepperItem) => {
-    const result = registrationFormSchema.safeParse(onBoardingStore.registrationForm);
+    const result = createUserSchema.safeParse(onBoardingStore.registrationForm);
 
     if (!result.success) {
       result.error.issues.forEach((issue) => {

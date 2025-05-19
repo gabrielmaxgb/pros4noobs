@@ -33,6 +33,13 @@ export default defineNuxtConfig({
     ],
   },
 
+  mongoose: {
+    modelsDir: 'server/models',
+    options: {
+      dbName: process.env.NODE_ENV === 'development' ? 'dev' : 'prod',
+    }
+  },
+
   modules: [
     '@nuxt/eslint',
     '@nuxt/icon',
@@ -42,5 +49,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/scripts',
     '@pinia/nuxt',
-  ],
-});
+    'nuxt-mongoose',
+    './server/seedingModule.ts',
+  ]
+})
