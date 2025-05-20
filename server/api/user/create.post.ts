@@ -8,6 +8,7 @@ import {
 import { parseAndValidate } from '~/server/utils/handlers';
 import { UserService } from '~/server/core/user/userService';
 import { userToModel } from '~/server/core/user/user';
+import container from '~/server/core/container';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -19,7 +20,7 @@ export default defineEventHandler(async (event) => {
     }
 
     // Check if the user already exists
-    const userService = UserService.getInstance();
+    const userService = container.get(UserService);
     const result = await userService.createUser(data);
 
     if (result.isFailure) {

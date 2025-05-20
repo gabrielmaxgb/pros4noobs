@@ -4,7 +4,9 @@ import { verify } from "argon2";
 import { generateToken } from "./tokens";
 import { setCookie, H3Event, EventHandlerRequest } from "h3";
 import { Result } from "~/server/utils/result";
+import { injectable } from 'inversify';
 
+@injectable()
 export class LoginService {
     private static instance: LoginService | null = null;
 

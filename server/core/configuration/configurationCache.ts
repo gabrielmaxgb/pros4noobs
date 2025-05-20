@@ -1,8 +1,10 @@
+import { injectable } from 'inversify';
 import GeneralConfiguration from "./configurations";
 
 // TODO(titosilva): cache cases when the configuration is not found
 // TODO(titosilva): implement thread safety
 
+@injectable()
 export class ConfigurationCache {
     private static instance: ConfigurationCache;
     private cache: Map<string, [string, Date]>;

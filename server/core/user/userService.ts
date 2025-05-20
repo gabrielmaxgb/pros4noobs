@@ -3,7 +3,9 @@ import { TCreateUser_DTO } from "~/shared/user";
 import { UserRecord, User } from "./user"
 import { useConfigurationAsync } from "../configuration/useConfiguration";
 import * as argon2 from 'argon2';
+import { injectable } from 'inversify';
 
+@injectable()
 export class UserService {
     private static instance: UserService;
 
