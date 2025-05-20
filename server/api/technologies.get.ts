@@ -1,13 +1,12 @@
-import GeneralConfiguration from '~/server/models/configurations';
+import GeneralConfiguration from '~/server/core/configuration/configurations';
 import { defineEventHandler } from 'h3';
+import { useConfigurationAsync } from '~/server/core/configuration/useConfiguration';
 
 export default defineEventHandler(async (_event) => {
   try {
-    const techsConfig = await GeneralConfiguration.findOne({
-      key: 'technologies',
-    });
+    const techsConfig = await useConfigurationAsync('technologies');
 
-    const techs = techsConfig?.value?.split(',').map((tech: string) => tech.trim()) || [];
+    const techs = techsConfig?.split(',').map((tech: string) => tech.trim()) || [];
 
     return {
       status: 201,
