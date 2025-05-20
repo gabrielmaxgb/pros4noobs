@@ -6,5 +6,5 @@ export type ApiResponse<T> = {
   message: string;
 };
 
-export type TUserTechnologies = string[]; // only data attribute
-export type TUserRegistrationTechnologiesResponse = ApiResponse<TUserTechnologies>;
+export type TUserRegistrationTechnologiesListResponse = string[]; // only data attribute
+// export type TUserRegistrationTechnologiesResponse = ApiResponse<TUserTechnologies>;
