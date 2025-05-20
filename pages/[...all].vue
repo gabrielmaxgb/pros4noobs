@@ -5,13 +5,13 @@
 
   const handleBackClick = () => {
     const isAuthenticated = () => {
-      return true;
+      return false;
     };
 
-    if (!isAuthenticated()) {
-      navigateTo({ name: `login` });
-    } else {
+    if (isAuthenticated()) {
       navigateTo({ name: 'user-userId-dashboard', params: { userId: 123 } });
+    } else {
+      navigateTo({ name: `login` });
     }
   };
 </script>
