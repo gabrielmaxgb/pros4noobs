@@ -50,11 +50,10 @@ export default defineEventHandler(async (event) => {
       email: newUser.email,
       technologies: newUser.technologies,
       initialRole: newUser.initialRole,
-      superNoob: newUser.startedAsSuperBeginner,
-      // initialRoles: newUser.initialRoles.map((role: string) => role as UserRole),
+      startedAsSuperBeginner: newUser.startedAsSuperBeginner,
     };
 
-    return { status: 201, message: 'User created successfully.', user: newUser };
+    return { status: 201, message: 'User created successfully.', data: newUser };
   } catch (error: any) {
     return { status: 500, message: 'Internal server error.', error: error?.message };
   }

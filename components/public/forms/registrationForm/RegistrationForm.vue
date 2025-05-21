@@ -8,6 +8,8 @@
   import { base_createUserSchema } from '~/shared/user/createUserDto';
   import Password from './steps/Password.vue';
   import Interests from './steps/Interests.vue';
+  import { useMutation } from '@tanstack/vue-query';
+  import { createUser } from '~/setApi/publicApi';
 
   interface StepperRef {
     next: () => void;
@@ -68,6 +70,23 @@
       component: markRaw(Success),
     },
   ]);
+
+  const {
+    data: userCreationData,
+    mutate: createUserMutation,
+    isPending: isUserCreationPending,
+    isError: userCreationError,
+  } = useMutation({
+    mutationFn: () => createUser(onboardingStore.registrationForm),
+    onSuccess(data) {
+      console.log('User created successfully:', data);
+      onboardingStore.reset();
+      stepperCurrent?.value?.next();
+    },
+    onError(error) {
+      console.error('Error creating user:', error);
+    },
+  });
 
   const validatesRegistrationFormStep = (step: number) => {
     let validationSchema;
@@ -141,17 +160,9 @@
   };
 
   const handleSubmitRegistration = async () => {
-    try {
-      // TODO: Implement form submission
-      console.log('Submitting registration form:', onboardingStore.registrationForm);
-      await Promise.resolve(); // Placeholder for API call
-      stepperCurrent?.value?.next();
-    } catch (error) {
-      console.error('Failed to submit registration form:', error);
-      // TODO: Add proper error handling
-    } finally {
-      isFormSubmittionLoading.value = false;
-    }
+    console.log('Submitting registration form:', onboardingStore.registrationForm);
+    // await Promise.resolve(); // Placeholder for API call
+    await createUserMutation();
   };
 
   onBeforeUnmount(() => {
@@ -194,7 +205,8 @@
                 color="primary"
                 :variant="isNextButtonDisabled(item.step) ? 'link' : 'solid'"
                 size="xl"
-                :disabled="isNextButtonDisabled(item.step)"
+                :disabled="isNextButtonDisabled(item.step) || isUserCreationPending"
+                :loading="isUserCreationPending"
                 @click="handleNextStepClick(item)"
               >
                 {{ item.nextButtonLabel }}

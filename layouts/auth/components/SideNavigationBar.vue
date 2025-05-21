@@ -13,6 +13,11 @@
   const sideNavigationBar: TSidenavigationBar = {
     top: [
       {
+        label: 'Perfil',
+        routeName: 'user-userId-profile',
+        icon: 'lucide:user',
+      },
+      {
         label: 'Painel',
         routeName: 'user-userId-dashboard',
         icon: 'lucide:layout-dashboard',
@@ -21,11 +26,6 @@
         label: 'Mentorias',
         routeName: 'user-userId-mentorships',
         icon: 'hugeicons:study-lamp',
-      },
-      {
-        label: 'Perfil',
-        routeName: 'user-userId-profile',
-        icon: 'lucide:lamp-desk',
       },
       {
         label: 'Construtor de Currículo',
