@@ -1,11 +1,13 @@
 <script setup lang="ts">
   import { markRaw } from 'vue';
   import UserInformation from './steps/UserInformation.vue';
-  import Interests from './steps/Interests.vue';
   import Role from './steps/Role.vue';
   import Success from './steps/Success.vue';
   import type { StepperItem } from '@nuxt/ui';
-  import { useOnBoardingStore } from '~/stores/onBoardingStore';
+  import { createUserSchema } from '~/shared/user';
+  import { base_createUserSchema } from '~/shared/user/createUserDto';
+  import Password from './steps/Password.vue';
+  import Interests from './steps/Interests.vue';
 
   interface StepperRef {
     next: () => void;
@@ -15,15 +17,25 @@
     hasPrev: Ref<boolean>;
   }
   const stepperCurrent = useTemplateRef<StepperRef>('stepperCurrent');
-  const onBoardingStore = useOnBoardingStore();
+  const onboardingStore = useOnboardingStore();
   const isFormSubmittionLoading = ref(false);
   const registrationFormStepperItems = ref<StepperItem[]>([
     {
+      step: 0,
+      nextStep: 1,
+      description: 'Dados pessoais',
+      icon: 'lucide:user',
+      component: markRaw(UserInformation),
+      backButtonLabel: 'Voltar',
+      nextButtonLabel: 'Próximo',
+    },
+    {
+      prevStep: 0,
       step: 1,
       nextStep: 2,
-      description: 'Dados pessoais',
-      icon: 'i-lucide-user',
-      component: markRaw(UserInformation),
+      description: 'Selecione seu papel',
+      icon: 'lucide:briefcase',
+      component: markRaw(Role),
       backButtonLabel: 'Voltar',
       nextButtonLabel: 'Próximo',
     },
@@ -31,9 +43,9 @@
       prevStep: 1,
       step: 2,
       nextStep: 3,
-      description: 'Selecione seu papel',
-      icon: 'i-lucide-briefcase',
-      component: markRaw(Role),
+      description: 'Tecnologias de interesse',
+      icon: 'lucide:star',
+      component: markRaw(Interests),
       backButtonLabel: 'Voltar',
       nextButtonLabel: 'Próximo',
     },
@@ -41,76 +53,97 @@
       prevStep: 2,
       step: 3,
       nextStep: 4,
-      description: 'Tecnologias de interesse',
-      icon: 'i-lucide-star',
-      component: markRaw(Interests),
+      description: 'Crie sua senha',
+      icon: 'lucide:lock',
+      value: 'password',
+      component: markRaw(Password),
       backButtonLabel: 'Voltar',
-      nextButtonLabel: 'Concluir',
+      nextButtonLabel: 'Próximo',
     },
     {
       prevStep: 3,
       step: 4,
       description: 'Sucesso',
-      icon: 'i-lucide-check-circle',
+      icon: 'lucide:circle-check',
       component: markRaw(Success),
     },
   ]);
 
-  const isBackButtonDisabled = computed(() => {
-    return !stepperCurrent?.value?.hasPrev;
-  });
-
-  const isNextButtonDisabled = (currentStep: number) => {
-    if (!stepperCurrent?.value?.hasNext) {
-      return true;
-    }
-    const form = onBoardingStore.registrationForm;
-
-    switch (currentStep) {
+  const validatesRegistrationFormStep = (step: number) => {
+    let validationSchema;
+    switch (step) {
+      case 0:
+        validationSchema = base_createUserSchema.pick({ name: true, email: true });
+        break;
       case 1:
-        return !(form.name && form.email);
+        validationSchema = base_createUserSchema.pick({ startRole: true });
+        break;
       case 2:
-        return !form.startRole;
+        validationSchema = base_createUserSchema.pick({
+          technologies: true,
+          startedAsSuperBeginner: true,
+        });
+        break;
       case 3:
-        return form.superBeginner
-          ? false
-          : !(
-              (form.technologies.length > 0)
-              // && form.areasOfInterest.length > 0
-            );
+        validationSchema = base_createUserSchema.pick({ password: true });
+        break;
+      default:
+        validationSchema = createUserSchema;
+    }
+
+    const result = validationSchema.safeParse(onboardingStore.registrationForm);
+    return result;
+  };
+
+  const isNextButtonDisabled = (step: number) => {
+    const form = onboardingStore.registrationForm;
+
+    switch (step) {
+      case 0:
+        return !form.name || !form.email;
+      case 1:
+        return !form.startRole;
+      case 2:
+        return (
+          !form.startedAsSuperBeginner && (!form.technologies || form.technologies.length === 0)
+        );
+      case 3:
+        return !form.password;
       default:
         return false;
     }
   };
 
   const handleNextStepClick = (item: StepperItem) => {
-    const result = registrationFormSchema.safeParse(onBoardingStore.registrationForm);
+    onboardingStore.registrationFormErrors = {};
+    const result = validatesRegistrationFormStep(item.step);
 
-    if (!result.success) {
+    if (result.success) {
+      onboardingStore.registrationFormErrors = {};
+
+      if (item.value === 'password') {
+        handleSubmitRegistration();
+      } else {
+        stepperCurrent?.value?.next();
+      }
+    } else {
       result.error.issues.forEach((issue) => {
         const field = issue.path[0] as keyof TRegistrationForm;
-        onBoardingStore.registrationFormErrors[field] = issue.message;
+        onboardingStore.registrationFormErrors[field] = issue.message;
       });
       return;
-    }
-
-    onBoardingStore.registrationFormErrors = {};
-
-    if (item.step === registrationFormStepperItems.value.length - 1) {
-      handleSubmitRegistration();
-    } else {
-      stepperCurrent?.value?.next();
     }
   };
 
   const handleRestartRegistrationFormClick = () => {
-    onBoardingStore.reset();
+    onboardingStore.reset();
     registrationFormStepperItems.value.forEach(() => stepperCurrent.value?.prev());
   };
 
   const handleSubmitRegistration = async () => {
     try {
       // TODO: Implement form submission
+      console.log('Submitting registration form:', onboardingStore.registrationForm);
       await Promise.resolve(); // Placeholder for API call
       stepperCurrent?.value?.next();
     } catch (error) {
@@ -122,14 +155,14 @@
   };
 
   onBeforeUnmount(() => {
-    onBoardingStore.registrationFormErrors = {};
-    onBoardingStore.reset();
+    onboardingStore.registrationFormErrors = {};
+    onboardingStore.reset();
   });
 </script>
 
 <template>
-  <!-- onBoadingStore: {{ onBoardingStore.registrationForm }}<br />
-  onBoadingStoreErrors: {{ onBoardingStore.registrationFormErrors }}<br /> -->
+  <!-- onBoadingStore: {{ onboardingStore.registrationForm }}<br />
+  onBoadingStoreErrors: {{ onboardingStore.registrationFormErrors }}<br /> -->
   <form class="w-full flex flex-col" novalidate @submit.prevent="handleSubmitRegistration">
     <UStepper
       :ref="'stepperCurrent'"
@@ -144,19 +177,18 @@
             <component :is="item.component" />
             <div
               v-if="stepperCurrent?.hasNext"
-              class="w-full flex items-center justify-between mt-4"
+              class="w-full flex items-center justify-end gap-2 mt-4"
             >
               <UButton
+                v-if="stepperCurrent?.hasPrev"
                 class="cursor-pointer text-base"
                 color="primary"
-                :variant="isBackButtonDisabled ? 'link' : 'solid'"
+                :variant="stepperCurrent?.hasPrev ? 'link' : 'solid'"
                 size="xl"
-                :disabled="isBackButtonDisabled"
                 @click="stepperCurrent?.prev"
               >
                 {{ item.backButtonLabel }}
               </UButton>
-              <!-- item.step: {{ item.step }}<br /> -->
               <UButton
                 class="cursor-pointer text-base"
                 color="primary"

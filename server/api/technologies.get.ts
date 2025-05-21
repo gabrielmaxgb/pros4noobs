@@ -12,7 +12,7 @@ export default defineEventHandler(async (_event) => {
     return {
       status: 201,
       message: 'Technologies listed successfully.',
-      technologies: techs,
+      data: techs,
     };
   } catch (error: any) {
     return {

@@ -11,7 +11,7 @@
       class="overflow-y-auto flex flex-col items-center"
       :style="{ maxHeight: `calc(100vh - ${TOP_NAVBAR_HEIGHT})` }"
     >
-      <div class="w-12/12 pt-8">
+      <div class="w-12/12 py-8">
         <slot />
       </div>
     </div>

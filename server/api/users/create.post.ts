@@ -1,14 +1,8 @@
 import User from '../../models/user';
 import { defineEventHandler, readBody } from 'h3';
 import GeneralConfiguration from '~/server/models/configurations';
-import {
-  type TCreateUser_DTO,
-  // type CreateUserDtoSchema as schema,
-  type IUserModel,
-  // type TUserRole,
-  createUserSchema,
-} from '~/shared/user';
 import * as argon2 from 'argon2';
+import { type TCreateUser_DTO, type IUserModel, createUserSchema } from '~/shared/user';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -54,7 +48,6 @@ export default defineEventHandler(async (event) => {
       password: data.password, // Note: Hash the password in production
       passwordHash: passwordHash,
       technologies: data.technologies,
-      // initialRoles: body.initialRoles,
       initialRole: data.startRole,
       startedAsSuperBeginner: data.startedAsSuperBeginner,
     });
