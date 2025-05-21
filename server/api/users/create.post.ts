@@ -3,6 +3,7 @@ import { defineEventHandler, readBody, setResponseStatus } from 'h3';
 import GeneralConfiguration from '~/server/models/configurations';
 import { type TCreateUser_DTO, type IUserModel, createUserSchema } from '~/shared/user';
 import * as argon2 from 'argon2';
+import { Ok, Created, NotFound, BadRequest, InternalServerError } from '~/server/utils/response';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -11,8 +12,7 @@ export default defineEventHandler(async (event) => {
     // Validate the request body against the schema
     const parsedBody = createUserSchema.safeParse(body);
     if (!parsedBody.success) {
-      setResponseStatus(event, 400);
-      return { status: 400, message: 'Invalid input', errors: parsedBody.error.errors };
+      return BadRequest(event, 'Invalid input');
     }
 
     // Extract the validated data
@@ -21,8 +21,7 @@ export default defineEventHandler(async (event) => {
     // Check if the user already exists
     const existingUser = await User.findOne({ email: data.email });
     if (existingUser) {
-      setResponseStatus(event, 400);
-      return { status: 400, message: 'User already exists.' };
+      return BadRequest(event, 'User already exists.');
     }
 
     const techsConfig = await GeneralConfiguration.findOne({
@@ -32,8 +31,7 @@ export default defineEventHandler(async (event) => {
     const techs = techsConfig?.value?.split(',').map((tech: string) => tech.trim()) || [];
 
     if (!data.technologies.every((tech) => techs.includes(tech))) {
-      setResponseStatus(event, 400);
-      return { status: 400, message: 'Invalid technology selected.' };
+      return BadRequest(event, 'Invalid technology selected.');
     }
 
     const passwordHash = await argon2.hash(data.password, {
@@ -68,10 +66,8 @@ export default defineEventHandler(async (event) => {
       roles: newUser.roles.map((role: string) => role as 'noob' | 'pro'),
     };
 
-    setResponseStatus(event, 201);
-    return { status: 201, message: 'User created successfully.', data: model };
+    return Created(event, model, 'User created successfully.');
   } catch (error: any) {
-    setResponseStatus(event, 500);
-    return { status: 500, message: 'Internal server error.', error: error?.message };
+    return InternalServerError(event, 'Internal server error.');
   }
 });

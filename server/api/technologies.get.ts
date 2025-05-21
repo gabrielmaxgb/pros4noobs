@@ -1,5 +1,6 @@
 import GeneralConfiguration from '~/server/models/configurations';
-import { defineEventHandler, setResponseStatus } from 'h3';
+import { Ok, InternalServerError } from '~/server/utils/response';
+import { setResponseStatus } from 'h3';
 
 export default defineEventHandler(async (_event) => {
   try {
@@ -8,22 +9,12 @@ export default defineEventHandler(async (_event) => {
     });
 
     if (techsConfig) {
-      setResponseStatus(_event, 201);
+      const techs = techsConfig.value.split(',').map((tech: string) => tech.trim());
+      return Ok(_event, techs, 'Technologies listed successfully.');
     }
 
-    const techs = techsConfig?.value?.split(',').map((tech: string) => tech.trim()) || [];
-
-    return {
-      status: 201,
-      message: 'Technologies listed successfully.',
-      data: techs,
-    };
+    return Ok(_event, [], 'No technologies found.');
   } catch (error: any) {
-    setResponseStatus(_event, 500);
-    return {
-      status: 500,
-      message: 'Internal server error.',
-      error: error.message,
-    };
+    return InternalServerError(_event, 'Internal server error.');
   }
 });

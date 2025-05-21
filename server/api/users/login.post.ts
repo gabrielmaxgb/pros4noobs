@@ -7,6 +7,7 @@ import {
   IUserModel,
 } from '~/shared/user';
 import * as argon2 from 'argon2';
+import { Ok, Created, NotFound, BadRequest, InternalServerError } from '~/server/utils/response';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -15,22 +16,19 @@ export default defineEventHandler(async (event) => {
     // Validate the request body against the schema
     const parsedBody = loginDtoSchema.safeParse(body);
     if (!parsedBody.success) {
-      setResponseStatus(event, 400);
-      return { status: 400, message: 'Invalid input', errors: parsedBody.error.errors };
+      return BadRequest(event, 'Invalid input');
     }
 
     const data = parsedBody.data as LoginDto;
     
     const user = await User.findOne({ email: data.email });
     if (!user) {
-        setResponseStatus(event, 404);
-        return { status: 404, message: 'User not found.' };
+        return NotFound(event, 'User not found.');
     }
 
     const isPasswordValid = await argon2.verify(user.passwordHash, data.password);
     if (!isPasswordValid) {
-        setResponseStatus(event, 404);
-        return { status: 404, message: 'User not found' }; 
+        return NotFound(event, 'User not found'); 
     }
 
     const model: IUserModel = {
@@ -51,10 +49,8 @@ export default defineEventHandler(async (event) => {
         maxAge: 60 * 60 * 24, // 1 day
     });
 
-    setResponseStatus(event, 201);
-    return { status: 201, message: 'Logged in successfully.', user: model };
+    return Ok(event, model, 'Logged in successfully.');
   } catch (error: any) {
-    setResponseStatus(event, 500);
-    return { status: 500, message: 'Internal server error.', error: error?.message };
+    return InternalServerError(event, 'Internal server error.');
   }
 });
