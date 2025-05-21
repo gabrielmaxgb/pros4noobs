@@ -14,4 +14,5 @@ export interface IUserModel {
   startedAsSuperBeginner: boolean;
   technologies: string[];
   initialRole: TUserRole;
+  roles: TUserRole[];
 }

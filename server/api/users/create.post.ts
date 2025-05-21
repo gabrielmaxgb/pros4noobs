@@ -50,6 +50,7 @@ export default defineEventHandler(async (event) => {
       technologies: data.technologies,
       initialRole: data.startRole,
       startedAsSuperBeginner: data.startedAsSuperBeginner,
+      roles: [data.startRole],
     });
 
     await newUser.save();
@@ -64,7 +65,7 @@ export default defineEventHandler(async (event) => {
       roles: newUser.roles.map((role: string) => role as 'noob' | 'pro'),
     };
 
-    return { status: 201, message: 'User created successfully.', data: newUser };
+    return { status: 201, message: 'User created successfully.', data: model };
   } catch (error: any) {
     return { status: 500, message: 'Internal server error.', error: error?.message };
   }
