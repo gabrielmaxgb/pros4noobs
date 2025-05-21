@@ -2,7 +2,7 @@
   import { useMutation } from '@tanstack/vue-query';
   import type { z as zType } from 'zod';
   import { z } from 'zod';
-  import { login } from '~/setApi/publicApi';
+  import { login } from '~/setApi/authApi';
 
   definePageMeta({
     layout: false,
@@ -27,7 +27,7 @@
     onSuccess: async (data) => {
       console.log('Login bem-sucedido:', data);
       await session.fetchSession();
-      console.log('session', session);
+      console.log('fetchSession on mutation', session);
       navigateTo({
         name: 'user-userId-dashboard',
         params: { userId: session.user?.id },

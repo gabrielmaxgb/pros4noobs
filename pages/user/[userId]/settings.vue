@@ -7,8 +7,8 @@
 <template>
   <PageContainer>
     <PageHeader
-      title="Mentorias"
-      subtitle="Veja as mentorias que você está participando, e todo seu histórico de mentorias."
+      title="Configurações"
+      :subtitle="`Aqui você pode ver as configurações da sua conta e editar as informações que você deseja.`"
     />
   </PageContainer>
 </template>

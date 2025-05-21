@@ -15,7 +15,7 @@
 
 <template>
   <UButton
-    class="cursor-pointer flex items-center rounded-none"
+    class="cursor-pointer flex items-center rounded-none !px-6"
     :class="{ 'justify-center': collapsed }"
     :variant="active ? 'soft' : 'ghost'"
     size="xl"

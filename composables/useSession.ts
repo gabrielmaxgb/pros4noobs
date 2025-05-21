@@ -1,5 +1,5 @@
-import { getSession } from '~/setApi/publicApi';
 import type { IUserModel } from '~/shared/user';
+import { getSession } from '../setApi/authApi';
 
 export const useSession = () => {
   const session = useState('session', () => ({
