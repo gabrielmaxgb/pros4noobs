@@ -21,7 +21,7 @@
     {
       title: 'Fazemos o match',
       content: 'Conectamos iniciantes com mentores de forma justa e intencional.',
-      icon: 'lucide:shield-user',
+      icon: 'lucide:users',
     },
     {
       title: 'Mentoria de verdade',
