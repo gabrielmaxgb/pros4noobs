@@ -8,7 +8,7 @@ export default defineNuxtPlugin((nuxt) => {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 1000 * 60 * 5, // 5 minutos
+        staleTime: 1000 * 60 * 5,
         refetchOnWindowFocus: false,
         retry: 1,
       },
@@ -22,7 +22,6 @@ export default defineNuxtPlugin((nuxt) => {
   if (import.meta.server) {
     nuxt.hooks.hook('app:rendered', () => {
       vueQueryState.value = dehydrate(queryClient);
-      console.log('✅ Vue Query dehydrated on server');
     });
   }
 
@@ -30,7 +29,6 @@ export default defineNuxtPlugin((nuxt) => {
     nuxt.hooks.hook('app:created', () => {
       if (vueQueryState.value) {
         hydrate(queryClient, vueQueryState.value);
-        console.log('✅ Vue Query hydrated on client');
       }
     });
   }
