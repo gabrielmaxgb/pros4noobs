@@ -10,5 +10,14 @@
       Esperamos que você tenha uma ótima experiência na nossa plataforma e que sua jornada seja
       repleta de aprendizado e crescimento.
     </p>
+    <UButton
+      class="cursor-pointer"
+      size="xl"
+      color="primary"
+      variant="soft"
+      @click="navigateTo({ name: 'login' })"
+    >
+      Entrar
+    </UButton>
   </div>
 </template>

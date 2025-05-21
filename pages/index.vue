@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import { UButton } from '#components';
+
   interface IHeroActionButton {
     label: string;
     to: string;
@@ -16,12 +18,12 @@
     {
       title: 'Cadastre-se',
       content: 'Preencha um formulário simples como noob ou pro.',
-      icon: 'i-lucide-user-plus',
+      icon: 'lucide:user-round-plus',
     },
     {
       title: 'Fazemos o match',
       content: 'Conectamos iniciantes com mentores de forma justa e intencional.',
-      icon: 'i-lucide-handshake',
+      icon: 'lucide:users',
     },
     {
       title: 'Mentoria de verdade',
@@ -49,6 +51,12 @@
   //   return res;
   // };
 
+  // const fetchTest = async () => {
+  //   return await $fetch('https://pros4noobs.vercel.app/api/technologies');
+  // };
+
+  // const { data } = await useAsyncData(() => $fetch('/api/technologies'));
+
   onMounted(() => {
     setInterval(() => {
       stepperActive.value = (stepperActive.value + 1) % stepperItems.length;
@@ -58,13 +66,17 @@
 
 <template>
   <div class="w-full flex flex-col items-center gap-24">
-    <!-- <UButton :color="'primary'" :variant="'ghost'" @click="handleTest">
-      test
-    </UButton> -->
+    <!-- <UButton
+      class="cursor-pointer"
+      size="xl"
+      color="primary"
+      variant="outline"
+      @click="() => fetchTest()"
+    >
+      Testar API
+    </UButton>
 
-    <!-- movies: {{ movies }}<br />
-    isPending: {{ isPending }}<br />
-    isError: {{ isError }}<br /> -->
+    data: {{ data }}<br /> -->
 
     <!-- Hero Section -->
     <section class="pt-10 w-11/12 lg:w-10/12 text-center space-y-8 text-gray-300">

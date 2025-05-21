@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import Paper from '~/components/Paper.vue';
   import type { z as zType } from 'zod';
   import { z } from 'zod';
 
