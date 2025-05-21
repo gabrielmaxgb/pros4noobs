@@ -18,7 +18,7 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  plugins: ['~/plugins/vue-query.client.ts'],
+  plugins: ['~/plugins/vue-query.ts'],
   vite: {
     plugins: [tailwindcss()],
   },
@@ -37,7 +37,7 @@ export default defineNuxtConfig({
     modelsDir: 'server/models',
     options: {
       dbName: process.env.NODE_ENV === 'development' ? 'dev' : 'prod',
-    }
+    },
   },
 
   modules: [
@@ -51,5 +51,5 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-mongoose',
     './server/seedingModule.ts',
-  ]
-})
+  ],
+});
