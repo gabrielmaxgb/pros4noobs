@@ -8,7 +8,7 @@ import {
 import { parseAndValidate } from '~/server/utils/handlers';
 import { UserService } from '~/server/core/user/userService';
 import { userToModel } from '~/server/core/user/user';
-import container from '~/server/core/container';
+import { container } from '~/server/core/container';
 
 export default defineEventHandler(async (event) => {
   try {

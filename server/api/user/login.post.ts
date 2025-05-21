@@ -3,7 +3,7 @@ import {
   loginDtoSchema,
 } from '~/shared/user';
 import { parseAndValidate } from '~/server/utils/handlers';
-import container from '~/server/core/container';
+import { useScope } from '~/server/core/container';
 import { LoginService } from '~/server/core/auth/loginService';
 
 export default defineEventHandler(async (event) => {
@@ -15,8 +15,10 @@ export default defineEventHandler(async (event) => {
     if (errors) {
       return { status: 400, message: 'Invalid input', errors };
     }
+
+    const scope = useScope();
     
-    const loginService = container.get(LoginService);
+    const loginService = scope.get(LoginService);
     const result = await loginService.login(event, data);
 
     if (result.isFailure) {

@@ -6,7 +6,6 @@ import GeneralConfiguration from "./configurations";
 
 @injectable()
 export class ConfigurationCache {
-    private static instance: ConfigurationCache;
     private cache: Map<string, [string, Date]>;
     private cacheDuration: number = 1000 * 60 * 5; // 5 minutes
 
@@ -14,18 +13,10 @@ export class ConfigurationCache {
         this.cache = new Map();
     }
 
-    public static getInstance(): ConfigurationCache {
-        if (!ConfigurationCache.instance) {
-            ConfigurationCache.instance = new ConfigurationCache();
-        }
-        return ConfigurationCache.instance;
-    }
-
     public async get(key: string): Promise<string | null> {
         const cachedValue = this.getCachedValue(key);
 
         if (cachedValue) {
-            console.log(`Cache hit for key: ${key}`);
             return cachedValue;
         }
 

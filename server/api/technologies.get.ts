@@ -1,4 +1,3 @@
-import GeneralConfiguration from '~/server/core/configuration/configurations';
 import { defineEventHandler } from 'h3';
 import { useConfigurationAsync } from '~/server/core/configuration/useConfiguration';
 

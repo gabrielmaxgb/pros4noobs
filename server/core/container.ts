@@ -6,8 +6,25 @@ import { LoginService } from './auth/loginService';
 
 const container = new Container({ defaultScope: 'Request' });
 
-container.bind(ConfigurationCache).toSelf().inRequestScope();
-container.bind(UserService).toSelf().inRequestScope();
-container.bind(LoginService).toSelf().inRequestScope();
+container.bind(ConfigurationCache).toSelf().inSingletonScope();
 
-export default container;
+const newScope = () => {
+    const requestContainer = new Container({ defaultScope: 'Request', parent: container });
+
+    requestContainer.bind(UserService).toSelf().inSingletonScope();
+    requestContainer.bind(LoginService).toSelf().inSingletonScope();
+
+    return requestContainer;
+}
+
+const useScope = () => {
+    const event = useEvent();
+
+    if (!event.context.di) {
+        event.context.di = newScope();
+    }
+
+    return event.context.di;
+}
+
+export { useScope, container };
