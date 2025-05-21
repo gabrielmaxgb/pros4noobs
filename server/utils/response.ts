@@ -27,45 +27,49 @@ export const Created = <T>(
   };
 };
 
-export const NotFound = <T>(
+export const NotFound = (
   event: H3Event<EventHandlerRequest>,
   message = 'Resource not found.'
-): ApiResponse<T> => {
+): ApiResponse<any> => {
   setResponseStatus(event, 404);
   return {
+    data: {},
     status: 404,
     message,
   };
 };
 
-export const BadRequest = <T>(
+export const BadRequest = (
   event: H3Event<EventHandlerRequest>,
   message = 'Bad request.'
-): ApiResponse<T> => {
+): ApiResponse<any> => {
   setResponseStatus(event, 400);
   return {
+    data: {},
     status: 400,
     message,
   };
 };
 
-export const Unauthorized = <T>(
+export const Unauthorized = (
   event: H3Event<EventHandlerRequest>,
   message = 'Unauthorized.'
-): ApiResponse<T> => {
+): ApiResponse<any> => {
   setResponseStatus(event, 401);
   return {
+    data: {},
     status: 401,
     message,
   };
 };
 
-export const InternalServerError = <T>(
+export const InternalServerError = (
   event: H3Event<EventHandlerRequest>,
   message = 'Internal server error.'
-): ApiResponse<T> => {
+): ApiResponse<any> => {
   setResponseStatus(event, 500);
   return {
+    data: {},
     status: 500,
     message,
   };
