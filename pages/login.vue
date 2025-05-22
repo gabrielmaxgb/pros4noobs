@@ -1,14 +1,27 @@
 <script setup lang="ts">
+  import { useMutation } from '@tanstack/vue-query';
   import type { z as zType } from 'zod';
   import { z } from 'zod';
+  import { login } from '~/setApi/authApi';
+  import type { IUserModel } from '~/shared/user';
 
   definePageMeta({
     layout: false,
-    // middleware: 'block-route',
+    middleware: () => {
+      const session = useSession();
+      if (session.isAuthenticated) {
+        return navigateTo({
+          name: 'user-userId-profile',
+          params: { userId: session.user.value?.id },
+        });
+      }
+    },
   });
 
-  type TLoginForm = zType.infer<typeof loginFormSchema>;
+  export type TLoginForm = zType.infer<typeof loginFormSchema>;
 
+  // const router = useRouter();
+  const session = useSession();
   const loginFormErrors = reactive<Partial<Record<keyof TLoginForm, string>>>({});
   const loginForm = ref<TLoginForm>({
     email: '',
@@ -19,6 +32,21 @@
     password: z.string().min(6, { message: 'A senha deve ter pelo menos 6 caracteres' }),
   });
 
+  const { mutate: loginMutation, isPending: isLoginMutationPending } = useMutation({
+    mutationFn: () => login(loginForm.value),
+    onSuccess: async (_data: IUserModel) => {
+      await session.fetchSession();
+      navigateTo({
+        name: 'user-userId-dashboard',
+        params: { userId: session.user.value?.id },
+      });
+    },
+    onError: (error) => {
+      console.error('Erro ao fazer login:', error);
+      // Aqui pode mostrar mensagem de erro genérica
+    },
+  });
+
   const resetLoginFormErrors = () => {
     Object.keys(loginFormErrors).forEach((key) => {
       loginFormErrors[key as keyof TLoginForm] = '';
@@ -26,11 +54,9 @@
   };
 
   const validateLoginForm = () => {
-    console.log(loginForm.value); // Verifique os dados do formulário
-    resetLoginFormErrors(); // Limpa erros antes de atribuir novos
+    resetLoginFormErrors();
 
     const result = loginFormSchema.safeParse(loginForm.value);
-    console.log(result);
 
     if (!result.success) {
       result.error.errors.forEach((error) => {
@@ -51,10 +77,7 @@
 
   const handleSubmitLogin = async () => {
     if (validateLoginForm()) {
-      // Aqui você pode fazer a chamada para o login
-      console.log('Formulário válido, prosseguindo com o login...');
-      await navigateTo({ name: 'user-userId-dashboard', params: { userId: 123 } });
-      // Exemplo: await login(loginForm.value);
+      loginMutation();
     } else {
       return;
     }
@@ -126,6 +149,8 @@
           color="primary"
           :variant="loginFormErrors ? 'solid' : 'soft'"
           size="xl"
+          :disabled="isLoginMutationPending"
+          :loading="isLoginMutationPending"
           class="cursor-pointer w-full"
         >
           <span class="w-full"> Entrar </span>

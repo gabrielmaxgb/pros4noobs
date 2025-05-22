@@ -7,8 +7,8 @@
 <template>
   <PageContainer>
     <PageHeader
-      title="Dashboard"
-      subtitle="Resumo do seu perfil, suas mentorias e mais detalhes sobre sua jornada com a Pros4Noobs"
+      title="Configurações"
+      :subtitle="`Aqui você pode ver as configurações da sua conta e editar as informações que você deseja.`"
     />
   </PageContainer>
 </template>

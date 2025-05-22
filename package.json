@@ -25,7 +25,9 @@
     "@tailwindcss/vite": "^4.1.5",
     "@tanstack/vue-query": "^5.76.0",
     "@unhead/vue": "^2.0.8",
+    "argon2": "^0.43.0",
     "eslint": "^9.26.0",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.16.0",
     "mongoose": "^8.14.3",
     "nuxt": "^3.17.1",
@@ -38,6 +40,7 @@
   },
   "devDependencies": {
     "@iconify-json/icon-park-outline": "^1.2.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "dotenv-cli": "^8.0.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.0",

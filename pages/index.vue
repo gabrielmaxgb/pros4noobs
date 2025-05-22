@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import { UButton } from '#components';
-
   interface IHeroActionButton {
     label: string;
     to: string;
@@ -66,19 +64,6 @@
 
 <template>
   <div class="w-full flex flex-col items-center gap-24">
-    <!-- <UButton
-      class="cursor-pointer"
-      size="xl"
-      color="primary"
-      variant="outline"
-      @click="() => fetchTest()"
-    >
-      Testar API
-    </UButton>
-
-    data: {{ data }}<br /> -->
-
-    <!-- Hero Section -->
     <section class="pt-10 w-11/12 lg:w-10/12 text-center space-y-8 text-gray-300">
       <h1 class="text-3xl sm:text-5xl font-semibold font-header leading-tight text-primary">
         Comece sua jornada no mundo da tecnologia com apoio de verdade.
@@ -143,7 +128,7 @@
     <!-- Quem Somos -->
     <section class="py-12 w-10/12 text-neutral">
       <h2 class="text-3xl font-semibold text-center text-primary mb-6">Quem está por trás</h2>
-      <div class="grid grid-cols-12">
+      <div class="grid grid-cols-12 gap-12">
         <div class="col-span-12 lg:col-span-4 flex justify-center">
           <img
             src="https://github.com/gabrielmaxgb.png"
@@ -169,8 +154,14 @@
 
     <!-- Rodapé / Manifesto -->
     <footer class="w-10/12 py-12 text-center text-neutral border-t border-neutral mt-16">
-      <p class="italic text-xl">Se você quer ensinar, cobre. Se quer ajudar, doe.</p>
-      <p class="text-lg text-neutral">pros4noobs — um projeto de código e consciência.</p>
+      <p class="italic text-lg"
+        >Porque todo <span class="text-primary font-semibold">Pro</span> já foi
+        <span class="text-secondary font-semibold">Noob</span></p
+      >
+      <p class="text-lg text-neutral"
+        ><span class="text-primary font-semibold">Pros4Noob</span> — um projeto de código e
+        consciência.</p
+      >
 
       <p class="font-script text-sm text-neutral mt-6">
         Powered by

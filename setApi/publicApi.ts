@@ -1,4 +1,5 @@
-import type { ApiOptions, ApiResponse, TUserRegistrationTechnologiesListResponse } from './types';
+import type { ApiOptions, TUserRegistrationTechnologiesListResponse } from './types';
+import type { ApiResponse } from '~/shared/apiResponse';
 
 const publicApi = <T>(url: string, options?: ApiOptions) =>
   $fetch<ApiResponse<T>>(url, { ...options, credentials: 'omit' });
@@ -17,3 +18,12 @@ export const createUser = async (payload: TRegistrationForm) => {
   });
   return data;
 };
+
+// export const login = async (payload: TLoginForm): Promise<TLoginResponse> => {
+//   const { data } = await publicApi<TLoginResponse>('/api/users/login', {
+//     method: 'POST',
+//     body: payload,
+//   });
+//   console.log('login', data);
+//   return data;
+// };

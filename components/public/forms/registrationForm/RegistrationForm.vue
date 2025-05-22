@@ -160,8 +160,6 @@
   };
 
   const handleSubmitRegistration = async () => {
-    console.log('Submitting registration form:', onboardingStore.registrationForm);
-    // await Promise.resolve(); // Placeholder for API call
     await createUserMutation();
   };
 

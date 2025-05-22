@@ -1,5 +1,9 @@
 <script setup lang="ts">
-  import { navigationOptions } from '~/constants';
+  import type { INavigationOption } from '~/types/navigation';
+
+  const props = defineProps<{
+    navigationOptions: INavigationOption[];
+  }>();
 
   const route = useRoute();
 </script>
@@ -7,11 +11,10 @@
 <template>
   <section class="hidden max-w-fit md:flex items-center gap-4 overflow-x-scroll">
     <NuxtLink
-      v-for="(btn, index) in navigationOptions"
+      v-for="(btn, index) in props.navigationOptions"
       :key="index"
       :to="btn?.disabled ? '#' : btn.to"
       :class="['flex gap-4 min-w-fit', btn.disabled ? 'cursor-not-allowed opacity-50' : '']"
-      @click.prevent="btn?.disabled && console.log('Disabled')"
     >
       <UButton
         class="cursor-pointer text-sm"
