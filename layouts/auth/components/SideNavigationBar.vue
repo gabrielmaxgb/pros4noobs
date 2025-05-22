@@ -88,7 +88,7 @@
       </section>
 
       <section class="w-full flex flex-col gap-0">
-        <UModal :overlay="true" class="w-[100%]" title="Modal" size="sm">
+        <UModal :overlay="true" class="w-[100%]" title="Modal Title" size="sm">
           <SideNavItem
             :label="'Noob Coins'"
             icon="carbon:software-resource-cluster"
@@ -97,7 +97,7 @@
             :collapsed="isSideNavCollapsed"
           />
 
-          <template #body>Content</template>
+          <template #body>Modal Content</template>
         </UModal>
 
         <SideNavItem
