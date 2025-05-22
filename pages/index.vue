@@ -64,19 +64,6 @@
 
 <template>
   <div class="w-full flex flex-col items-center gap-24">
-    <!-- <UButton
-      class="cursor-pointer"
-      size="xl"
-      color="primary"
-      variant="outline"
-      @click="() => fetchTest()"
-    >
-      Testar API
-    </UButton>
-
-    data: {{ data }}<br /> -->
-
-    <!-- Hero Section -->
     <section class="pt-10 w-11/12 lg:w-10/12 text-center space-y-8 text-gray-300">
       <h1 class="text-3xl sm:text-5xl font-semibold font-header leading-tight text-primary">
         Comece sua jornada no mundo da tecnologia com apoio de verdade.

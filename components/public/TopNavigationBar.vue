@@ -1,5 +1,31 @@
 <script setup lang="ts">
-  import { TOP_NAVBAR_HEIGHT, navigationOptions } from '~/constants';
+  import { TOP_NAVBAR_HEIGHT } from '~/constants';
+  import type { INavigationOption } from '~/types/navigation';
+
+  const navigationOptions: INavigationOption[] = [
+    {
+      label: 'Inicio',
+      icon: 'fe:beginner',
+      to: '/',
+    },
+    {
+      label: 'Sobre',
+      icon: 'ix:about',
+      to: '/about',
+    },
+    {
+      label: 'Cadastre-se',
+      icon: 'mingcute:hand-2-fill',
+      to: '/onboarding',
+      // disabled: true,
+    },
+    {
+      label: 'Entrar',
+      icon: 'mingcute:login-2-fill',
+      to: '/login',
+      // disabled: true,
+    },
+  ];
 </script>
 
 <template>
@@ -14,7 +40,7 @@
           <div class="text-primary text-lg font-header">Pros 4 Noobs</div>
         </div>
       </NuxtLink>
-      <CenterNavigationBar class="hidden lg:flex" />
+      <CenterNavigationBar :navigation-options="navigationOptions" class="hidden lg:flex" />
       <UDropdownMenu
         :items="navigationOptions"
         :content="{
