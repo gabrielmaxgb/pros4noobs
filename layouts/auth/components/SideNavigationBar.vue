@@ -68,9 +68,9 @@
       @click="isSideNavCollapsed = !isSideNavCollapsed"
     >
       <UIcon
-        name="lucide:chevron-left"
-        size="20"
-        class="text-internal-black transition-transform duration-300"
+        name="mdi:arrow-u-left-top-bold"
+        size="15"
+        class="transition-transform duration-300 text-internal-black"
         :class="{ 'rotate-180': isSideNavCollapsed }"
       />
     </div>

@@ -10,10 +10,8 @@
     component?: Component;
   };
 
-  // const route = useRoute();
   const currentTab = ref<TMyTabsItem['value']>('select-default');
 
-  // const blockSettings = ref();
   const items: TMyTabsItem[] = [
     {
       label: 'Selecionar modelo pronto',
@@ -24,7 +22,7 @@
       label: 'Criar bloco customizado',
       value: 'create-custom-block',
       component: markRaw(CustomBlockCreator),
-      // disabled: true,
+      disabled: true,
     },
   ];
 
