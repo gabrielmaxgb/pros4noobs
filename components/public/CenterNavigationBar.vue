@@ -11,7 +11,7 @@
       :key="index"
       :to="btn?.disabled ? '#' : btn.to"
       :class="['flex gap-4 min-w-fit', btn.disabled ? 'cursor-not-allowed opacity-50' : '']"
-      @click.prevent="btn?.disabled && console.log('Disabled')"
+      @click.prevent="btn?.disabled"
     >
       <UButton
         class="cursor-pointer text-sm"

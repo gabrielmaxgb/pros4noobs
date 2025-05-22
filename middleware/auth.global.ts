@@ -3,14 +3,17 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (publicRoutes.includes(to.name as string)) {
     return;
   }
-  const { isAuthenticated, fetchSession } = useSession();
-  if (isAuthenticated === true) return;
-  if (isAuthenticated === false) {
+  const session = useSession();
+
+  if (session.isAuthenticated) {
+    return;
+  }
+  if (!session.isAuthenticated) {
     return navigateTo({ name: 'login' });
   }
   try {
-    await fetchSession();
-    if (!useSession().isAuthenticated) {
+    await session.fetchSession();
+    if (!session.user.value) {
       return navigateTo({ name: 'login' });
     }
   } catch {

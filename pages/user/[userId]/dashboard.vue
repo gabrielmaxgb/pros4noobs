@@ -1,7 +1,4 @@
 <script setup lang="ts">
-  import PageContainer from '~/components/auth/PageContainer.vue';
-  import PageHeader from '~/components/auth/PageHeader.vue';
-
   definePageMeta({
     layout: 'auth',
   });

@@ -1,13 +1,16 @@
 <script setup lang="ts">
   onMounted(() => {
-    const { fetchSession } = useSession();
-    fetchSession();
+    const session = useSession();
+    session.fetchSession();
   });
+
+  // const session = useSession();
 </script>
 
 <template>
   <div>
     <UApp :toaster="{ position: 'top-center' }">
+      <!-- session: {{ session }}<br /> -->
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>

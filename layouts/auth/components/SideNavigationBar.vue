@@ -45,10 +45,10 @@
   };
 
   const route = useRoute();
-  const isSideNavCollapsed = ref(true);
+  const isSideNavCollapsed = ref(false);
 
   const handleSideBarItemClick = (item: TSidenavigationBar_Item) => {
-    navigateTo({ name: item.routeName, params: { userId: 123 } });
+    navigateTo({ name: item.routeName, params: { userId: route.params.userId } });
   };
 
   const handleLogoutClick = async () => {};

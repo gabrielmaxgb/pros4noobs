@@ -1,17 +1,19 @@
 <script setup lang="ts">
   import type { TabsItem } from '@nuxt/ui';
 
+  type MyTabsItem = TabsItem & {
+    value: 'editor' | 'preview';
+  };
+
   definePageMeta({
     layout: 'auth',
   });
 
   const route = useRoute();
   const router = useRouter();
+  const currentTab = ref<MyTabsItem['value']>('editor');
 
-  console.log('route', route);
-  console.log('router', router.getRoutes());
-
-  const items: TabsItem[] = [
+  const items: MyTabsItem[] = [
     {
       label: 'Editor',
       value: 'editor',
@@ -22,25 +24,21 @@
     },
   ];
 
-  const active = computed({
-    get() {
-      return (route.query.tab as string) || 'editor';
-    },
-    set(tab) {
-      navigateTo({
-        name: `user-userId-portfolio-builder-${tab}`,
+  watch(
+    () => currentTab.value,
+    () => {
+      router.push({
+        name: `user-userId-portfolio-builder-${currentTab.value}`,
         params: { userId: route.params.userId },
-        query: { tab },
-        hash: '#control-active-item',
       });
-    },
-  });
+    }
+  );
 </script>
 
 <template>
   <div class="w-full flex flex-col gap-6">
     <UTabs
-      v-model="active"
+      v-model="currentTab"
       :content="false"
       variant="link"
       :items="items"

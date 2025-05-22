@@ -3,14 +3,24 @@
   import type { z as zType } from 'zod';
   import { z } from 'zod';
   import { login } from '~/setApi/authApi';
+  import type { IUserModel } from '~/shared/user';
 
   definePageMeta({
     layout: false,
-    // middleware: 'block-route',
+    middleware: () => {
+      const session = useSession();
+      if (session.isAuthenticated) {
+        return navigateTo({
+          name: 'user-userId-profile',
+          params: { userId: session.user.value?.id },
+        });
+      }
+    },
   });
 
   export type TLoginForm = zType.infer<typeof loginFormSchema>;
 
+  // const router = useRouter();
   const session = useSession();
   const loginFormErrors = reactive<Partial<Record<keyof TLoginForm, string>>>({});
   const loginForm = ref<TLoginForm>({
@@ -24,13 +34,11 @@
 
   const { mutate: loginMutation, isPending: isLoginMutationPending } = useMutation({
     mutationFn: () => login(loginForm.value),
-    onSuccess: async (data) => {
-      console.log('Login bem-sucedido:', data);
+    onSuccess: async (_data: IUserModel) => {
       await session.fetchSession();
-      console.log('fetchSession on mutation', session);
       navigateTo({
         name: 'user-userId-dashboard',
-        params: { userId: session.user?.id },
+        params: { userId: session.user.value?.id },
       });
     },
     onError: (error) => {

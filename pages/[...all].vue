@@ -3,13 +3,15 @@
     layout: false,
   });
 
+  const route = useRoute();
+
   const handleBackClick = () => {
     const isAuthenticated = () => {
       return false;
     };
 
     if (isAuthenticated()) {
-      navigateTo({ name: 'user-userId-dashboard', params: { userId: 123 } });
+      navigateTo({ name: 'user-userId-dashboard', params: { userId: route.params.userId } });
     } else {
       navigateTo({ name: `login` });
     }

@@ -11,7 +11,6 @@ const authApi = <T>(url: string, options?: ApiOptions) =>
 
 export const getSession = async (): Promise<IUserModel> => {
   const { data } = await authApi<IUserModel>('/api/users/who');
-  console.log('getSession', data);
   return data;
 };
 
@@ -20,6 +19,5 @@ export const login = async (payload: TLoginForm): Promise<TLoginResponse> => {
     method: 'POST',
     body: payload,
   });
-  console.log('login', data);
   return data;
 };

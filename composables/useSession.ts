@@ -1,36 +1,49 @@
 import type { IUserModel } from '~/shared/user';
 import { getSession } from '../setApi/authApi';
 
+type TSession = {
+  isAuthenticated: boolean;
+  user: IUserModel | null;
+};
+
 export const useSession = () => {
-  const session = useState('session', () => ({
+  const _session = useState<TSession>('session', () => ({
     isAuthenticated: false,
-    user: null as null | IUserModel,
+    user: null,
   }));
+
+  const isAuthenticated = computed(() => _session.value.isAuthenticated);
+  const user = computed(() => _session.value.user);
 
   const fetchSession = async () => {
     try {
       const data = await getSession();
-
-      session.value.isAuthenticated = true;
-      session.value.user = data;
+      _session.value.isAuthenticated = true;
+      _session.value.user = data;
     } catch (err) {
       console.error('Error fetching session:', err);
-      session.value.isAuthenticated = false;
-      session.value.user = null;
+      _session.value.isAuthenticated = false;
+      _session.value.user = null;
     }
   };
 
+  const setSession = (userData: IUserModel) => {
+    _session.value.isAuthenticated = true;
+    _session.value.user = userData;
+  };
+
   const logout = async () => {
-    // TODO: await $fetch('/api/auth/logout', { method: 'POST' });
-    session.value.isAuthenticated = false;
-    session.value.user = null;
+    // await $fetch('/api/auth/logout', { method: 'POST' });
+    _session.value.isAuthenticated = false;
+    _session.value.user = null;
     navigateTo('/login');
   };
 
   return {
-    isAuthenticated: session.value.isAuthenticated,
-    user: session.value.user,
+    isAuthenticated,
+    user,
     fetchSession,
+    setSession,
     logout,
   };
 };
