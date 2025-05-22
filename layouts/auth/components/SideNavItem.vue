@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import { UIcon } from '#components';
-
   defineProps<{
     label: string;
     icon: string;

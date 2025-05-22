@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { ClientOnly } from '#components';
   import SideNavigationBar from './components/SideNavigationBar.vue';
 </script>
 

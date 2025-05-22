@@ -1,6 +1,4 @@
 <script setup lang="ts">
-  import { UButton } from '#components';
-
   interface IHeroActionButton {
     label: string;
     to: string;

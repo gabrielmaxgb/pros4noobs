@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import type { TabsItem } from '@nuxt/ui';
-
   import type { Component } from 'vue';
   import StandardBlockSelector from './blocks/standardBlocks/StandardBlockSelector.vue';
   import CustomBlockCreator from './blocks/customBlocks/CustomBlockCreator.vue';

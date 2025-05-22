@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { UIcon } from '#components';
   import SideNavItem from './SideNavItem.vue';
 
   type TSidenavigationBar_Item = {
@@ -32,7 +31,7 @@
       },
       {
         label: 'Construtor de Currículo',
-        routeName: 'user-userId-portfolio-builder',
+        routeName: 'user-userId-portfolio-builder-editor',
         icon: 'lucide:picture-in-picture',
       },
       {
