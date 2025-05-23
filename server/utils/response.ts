@@ -1,6 +1,18 @@
 import { H3Event, EventHandlerRequest, setResponseStatus } from 'h3';
 import { ApiResponse } from '~/shared/apiResponse';
 
+export const OkWithoutData = (
+  event: H3Event<EventHandlerRequest>,
+  message = 'Request processed successfully.'
+): ApiResponse<any> => {
+  setResponseStatus(event, 200);
+  return {
+    data: {},
+    status: 200,
+    message,
+  };
+};
+
 export const Ok = <T>(
   event: H3Event<EventHandlerRequest>,
   data: T,
