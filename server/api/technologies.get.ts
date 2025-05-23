@@ -7,7 +7,7 @@ export default defineEventHandler(async (_event) => {
     const techsConfig = await useConfigurationAsync('technologies');
 
     if (techsConfig) {
-      const techs = techsConfig.value.split(',').map((tech: string) => tech.trim());
+      const techs = techsConfig.split(',').map((tech: string) => tech.trim());
       return Ok(_event, techs, 'Technologies listed successfully.');
     }
 

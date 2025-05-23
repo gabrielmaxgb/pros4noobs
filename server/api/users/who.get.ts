@@ -1,15 +1,14 @@
 import {
   Ok,
-  Created,
   NotFound,
-  BadRequest,
   Unauthorized,
   InternalServerError,
 } from '~/server/utils/response';
-import { setResponseStatus } from 'h3';
-import User from '~/server/models/user';
-import { verifyToken } from '~/server/auth/tokens';
+import { UserRecord, userToModel } from '~/server/core/user/user';
+import { verifyToken } from '~/server/core/auth/tokens';
 import { IUserModel } from '~/shared/user';
+import { useScope } from '~/server/core/container';
+import { LoginService } from '~/server/core/auth/loginService';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -18,28 +17,15 @@ export default defineEventHandler(async (event) => {
       return Unauthorized(event, 'Unauthorized. No token provided.');
     }
 
-    let userId: string;
-    try {
-      userId = verifyToken(token);
-    } catch (error) {
+    const scope = useScope();
+    const result = await scope.get(LoginService);
+
+    if (result.isFailure) {
       return Unauthorized(event, 'Unauthorized. Invalid token.');
     }
 
-    const user = await User.findOne({ _id: userId });
-    if (!user) {
-      return NotFound(event, 'User not found.');
-    }
-
-    const model: IUserModel = {
-      id: user._id.toString(),
-      name: user.name,
-      email: user.email,
-      technologies: user.technologies,
-      initialRole: user.initialRole,
-      roles: user.roles.map((role: string) => role as 'noob' | 'pro'),
-      startedAsSuperBeginner: user.startedAsSuperBeginner,
-    };
-
+    const user = result.data!;
+    const model = userToModel(user);
     return Ok(event, model, 'I know who you are.');
   } catch (error: any) {
     return InternalServerError(event, 'Internal server error.');

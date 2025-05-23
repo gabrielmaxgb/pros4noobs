@@ -1,7 +1,7 @@
 import { parseAndValidate } from '~/server/utils/handlers';
 import { UserService } from '~/server/core/user/userService';
 import { userToModel } from '~/server/core/user/user';
-import { container } from '~/server/core/container';
+import { useScope } from '~/server/core/container';
 import { defineEventHandler, readBody } from 'h3';
 import { createUserSchema } from '~/shared/user';
 import { Created, BadRequest, InternalServerError } from '~/server/utils/response';
@@ -15,7 +15,8 @@ export default defineEventHandler(async (event) => {
       return BadRequest(event, 'Invalid input');
     }
 
-    const userService = container.get(UserService);
+    const scope = useScope();
+    const userService = scope.get(UserService);
     const result = await userService.createUser(data);
 
     if (result.isFailure) {
