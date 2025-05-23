@@ -23,7 +23,7 @@ const userToModel = (user: User): IUserModel => ({
   email: user.email,
   technologies: user.technologies,
   initialRole: user.initialRole,
-  superNoob: user.startedAsSuperBeginner,
+  startedAsSuperBeginner: user.startedAsSuperBeginner,
   roles: user.roles.map((role: string) => role as 'noob' | 'pro'),
 });
 
