@@ -13,9 +13,8 @@ export default defineEventHandler(async (event) => {
       return Unauthorized(event, 'No token provided.');
     }
 
-    let userId: string;
     try {
-      userId = verifyToken(token);
+      verifyToken(token);
     } catch (error) {
       return Unauthorized(event, 'Invalid token.');
     }
