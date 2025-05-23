@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to) => {
-  const publicRoutes = ['login', 'index', 'onboarding', 'about'];
+  const publicRoutes = ['login', 'index', 'onboarding', 'about', 'password-recovery'];
 
   if (publicRoutes.includes(to.name as string)) return;
 

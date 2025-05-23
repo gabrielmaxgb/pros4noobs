@@ -166,6 +166,7 @@
       :variant="'link'"
       size="md"
       class="max-w-fit cursor-pointer"
+      @click="navigateTo({ name: 'password-recovery' })"
     >
       Esqueci a senha
     </UButton>
