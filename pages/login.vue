@@ -12,6 +12,7 @@
 
   export type TLoginForm = zType.infer<typeof loginFormSchema>;
 
+  const showPassword = ref(false);
   const session = useSession();
   const loginFormErrors = reactive<Partial<Record<keyof TLoginForm, string>>>({});
   const loginForm = ref<TLoginForm>({
@@ -121,13 +122,26 @@
       <div>
         <UInput
           v-model="loginForm.password"
-          label="Senha"
-          type="password"
-          size="xl"
-          :error="loginFormErrors.password"
           placeholder="Senha"
+          :type="showPassword ? 'text' : 'password'"
           class="w-full"
-        />
+          size="xl"
+          :aria-invalid="loginFormErrors.password ? 'true' : 'false'"
+          :ui="{ trailing: 'pe-1' }"
+        >
+          <template #trailing>
+            <UButton
+              color="neutral"
+              variant="link"
+              size="xl"
+              :icon="!showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+              :aria-label="showPassword ? 'Esconder' : 'Mostrar'"
+              :aria-pressed="showPassword"
+              aria-controls="password"
+              @click="showPassword = !showPassword"
+            />
+          </template>
+        </UInput>
         <p v-if="loginFormErrors.password" class="text-red-500 text-sm mt-1">
           {{ loginFormErrors.password }}
         </p>
@@ -156,6 +170,4 @@
       Esqueci a senha
     </UButton>
   </Paper>
-  <!-- </section>
-  </div> -->
 </template>

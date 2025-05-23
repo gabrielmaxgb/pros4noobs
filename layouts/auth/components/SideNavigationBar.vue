@@ -107,20 +107,20 @@
                 <div class="flex items-center gap-2">
                   <div class="relative flex items-center justify-center">
                     <div
-                      class="absolute size-28 rounded-full bg-warning/50 opacity-30 blur-xl animate-pulse scale-20"
+                      class="absolute size-28 rounded-full bg-warning/50 opacity-30 blur-2xl animate-pulse scale-15"
                     />
-                    <UIcon name="solar:fire-broken" size="20" class="text-warning" />
+                    <UIcon name="solar:fire-bold" size="20" class="text-warning" />
                   </div>
-                  <p class="text-warning">23 <span class="text-xs">Flares</span></p>
+                  <p class="text-neutral-50">23 <span class="text-xs">Flares</span></p>
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="relative flex items-center justify-center">
                     <div
-                      class="absolute size-28 rounded-full bg-secondary/50 opacity-30 blur-xl animate-pulse scale-20"
+                      class="absolute size-28 rounded-full bg-red-500/50 opacity-30 blur-2xl animate-pulse scale-15"
                     />
-                    <UIcon name="cuida:sparks-outline" size="20" class="text-secondary" />
+                    <UIcon name="cuida:sparks-outline" size="20" class="text-red-500" />
                   </div>
-                  <span class="text-secondary">8 <span class="text-xs">Sparks</span></span>
+                  <span class="text-neutral-50">8 <span class="text-xs">Sparks</span></span>
                 </div>
               </div>
             </template>
