@@ -98,7 +98,33 @@
             class="text-primary bg-gradient-to-br from-primary/10 via-black/10 to-secondary/10"
             :active="false"
             :collapsed="isSideNavCollapsed"
-          />
+          >
+            <template #custom-content>
+              <div v-if="isSideNavCollapsed" class="flex items-center justify-center">
+                <UIcon name="material-symbols:money-bag-rounded" size="20" class="text-primary" />
+              </div>
+              <div v-if="!isSideNavCollapsed" class="flex items-center justify-start gap-4">
+                <div class="flex items-center gap-2">
+                  <div class="relative flex items-center justify-center">
+                    <div
+                      class="absolute size-28 rounded-full bg-warning/50 opacity-30 blur-xl animate-pulse scale-20"
+                    />
+                    <UIcon name="solar:fire-broken" size="20" class="text-warning" />
+                  </div>
+                  <p class="text-warning">23 <span class="text-xs">Flares</span></p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="relative flex items-center justify-center">
+                    <div
+                      class="absolute size-28 rounded-full bg-secondary/50 opacity-30 blur-xl animate-pulse scale-20"
+                    />
+                    <UIcon name="cuida:sparks-outline" size="20" class="text-secondary" />
+                  </div>
+                  <span class="text-secondary">8 <span class="text-xs">Sparks</span></span>
+                </div>
+              </div>
+            </template>
+          </SideNavItem>
 
           <template #body>Modal Content</template>
         </UModal>

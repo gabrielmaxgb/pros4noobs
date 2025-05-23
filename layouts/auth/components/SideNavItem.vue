@@ -19,13 +19,16 @@
     size="xl"
     @click="emit('click')"
   >
-    <UIcon :name="icon" size="20" />
+    <slot v-if="$slots['custom-content']" name="custom-content" />
+    <div v-else class="flex items-center" :class="[!collapsed ? 'gap-3' : '']">
+      <UIcon :name="icon" size="20" />
 
-    <span
-      class="whitespace-nowrap transition-all duration-300 delay-100"
-      :class="collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto'"
-    >
-      {{ label }}
-    </span>
+      <span
+        class="whitespace-nowrap transition-all duration-300 delay-100"
+        :class="collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto'"
+      >
+        {{ label }}
+      </span>
+    </div>
   </UButton>
 </template>
