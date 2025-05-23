@@ -7,20 +7,11 @@
 
   definePageMeta({
     layout: false,
-    middleware: () => {
-      const session = useSession();
-      if (session.isAuthenticated) {
-        return navigateTo({
-          name: 'user-userId-profile',
-          params: { userId: session.user.value?.id },
-        });
-      }
-    },
+    middleware: 'redirect-if-authenticated',
   });
 
   export type TLoginForm = zType.infer<typeof loginFormSchema>;
 
-  // const router = useRouter();
   const session = useSession();
   const loginFormErrors = reactive<Partial<Record<keyof TLoginForm, string>>>({});
   const loginForm = ref<TLoginForm>({
@@ -34,16 +25,15 @@
 
   const { mutate: loginMutation, isPending: isLoginMutationPending } = useMutation({
     mutationFn: () => login(loginForm.value),
-    onSuccess: async (_data: IUserModel) => {
-      await session.fetchSession();
+    onSuccess: async (data: IUserModel) => {
+      session.setSession(data);
       navigateTo({
         name: 'user-userId-dashboard',
-        params: { userId: session.user.value?.id },
+        params: { userId: data.id },
       });
     },
     onError: (error) => {
       console.error('Erro ao fazer login:', error);
-      // Aqui pode mostrar mensagem de erro genérica
     },
   });
 
@@ -88,7 +78,6 @@
   <Paper
     class="relative w-full h-[100vh] flex flex-col items-center justify-center bg-accented gap-6 py-20"
   >
-    <!-- color="primary" -->
     <UButton
       size="xl"
       class="absolute top-6 left-6 text-primary cursor-pointer"

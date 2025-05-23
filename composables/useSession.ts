@@ -18,13 +18,14 @@ export const useSession = () => {
 
   const { mutate: logoutMutation } = useMutation({
     mutationFn: () => logoutReq(),
-    onSuccess(data) {
-      console.log('User created successfully:', data);
+    onSuccess: async () => {
       endSession();
-      // navigateTo('/login');
+      navigateTo({
+        name: 'login',
+      });
     },
-    onError(error) {
-      console.error('Error creating user:', error);
+    onError: (error) => {
+      console.error('Erro ao fazer logout:', error);
     },
   });
 
@@ -40,7 +41,7 @@ export const useSession = () => {
     }
   };
 
-  const endSession = () => {
+  const endSession = async () => {
     _session.value.isAuthenticated = false;
     _session.value.user = null;
   };
