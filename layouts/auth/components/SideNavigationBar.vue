@@ -45,12 +45,15 @@
 
   const route = useRoute();
   const isSideNavCollapsed = ref(false);
+  const session = useSession();
 
   const handleSideBarItemClick = (item: TSidenavigationBar_Item) => {
     navigateTo({ name: item.routeName, params: { userId: route.params.userId } });
   };
 
-  const handleLogoutClick = async () => {};
+  const handleLogoutClick = async () => {
+    session.logout();
+  };
 
   const isRouteActive = (routeName: string): boolean => {
     return route.name?.toString().includes(routeName) || false;

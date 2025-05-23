@@ -1,5 +1,6 @@
 import type { IUserModel } from '~/shared/user';
-import { getSession } from '../setApi/authApi';
+import { getSession, logout as logoutReq } from '../setApi/authApi';
+import { useMutation } from '@tanstack/vue-query';
 
 type TSession = {
   isAuthenticated: boolean;
@@ -15,6 +16,18 @@ export const useSession = () => {
   const isAuthenticated = computed(() => _session.value.isAuthenticated);
   const user = computed(() => _session.value.user);
 
+  const { mutate: logoutMutation } = useMutation({
+    mutationFn: () => logoutReq(),
+    onSuccess(data) {
+      console.log('User created successfully:', data);
+      endSession();
+      // navigateTo('/login');
+    },
+    onError(error) {
+      console.error('Error creating user:', error);
+    },
+  });
+
   const fetchSession = async () => {
     try {
       const data = await getSession();
@@ -27,22 +40,25 @@ export const useSession = () => {
     }
   };
 
+  const endSession = () => {
+    _session.value.isAuthenticated = false;
+    _session.value.user = null;
+  };
+
   const setSession = (userData: IUserModel) => {
     _session.value.isAuthenticated = true;
     _session.value.user = userData;
   };
 
   const logout = async () => {
-    // await $fetch('/api/auth/logout', { method: 'POST' });
-    _session.value.isAuthenticated = false;
-    _session.value.user = null;
-    navigateTo('/login');
+    logoutMutation();
   };
 
   return {
     isAuthenticated,
     user,
     fetchSession,
+    endSession,
     setSession,
     logout,
   };
