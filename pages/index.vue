@@ -16,12 +16,12 @@
     {
       title: 'Cadastre-se',
       content: 'Preencha um formulário simples como noob ou pro.',
-      icon: 'i-lucide-user-plus',
+      icon: 'lucide:user-round-plus',
     },
     {
       title: 'Fazemos o match',
       content: 'Conectamos iniciantes com mentores de forma justa e intencional.',
-      icon: 'i-lucide-handshake',
+      icon: 'lucide:users',
     },
     {
       title: 'Mentoria de verdade',
@@ -49,6 +49,12 @@
   //   return res;
   // };
 
+  // const fetchTest = async () => {
+  //   return await $fetch('https://pros4noobs.vercel.app/api/technologies');
+  // };
+
+  // const { data } = await useAsyncData(() => $fetch('/api/technologies'));
+
   onMounted(() => {
     setInterval(() => {
       stepperActive.value = (stepperActive.value + 1) % stepperItems.length;
@@ -58,15 +64,6 @@
 
 <template>
   <div class="w-full flex flex-col items-center gap-24">
-    <!-- <UButton :color="'primary'" :variant="'ghost'" @click="handleTest">
-      test
-    </UButton> -->
-
-    <!-- movies: {{ movies }}<br />
-    isPending: {{ isPending }}<br />
-    isError: {{ isError }}<br /> -->
-
-    <!-- Hero Section -->
     <section class="pt-10 w-11/12 lg:w-10/12 text-center space-y-8 text-gray-300">
       <h1 class="text-3xl sm:text-5xl font-semibold font-header leading-tight text-primary">
         Comece sua jornada no mundo da tecnologia com apoio de verdade.
@@ -131,7 +128,7 @@
     <!-- Quem Somos -->
     <section class="py-12 w-10/12 text-neutral">
       <h2 class="text-3xl font-semibold text-center text-primary mb-6">Quem está por trás</h2>
-      <div class="grid grid-cols-12">
+      <div class="grid grid-cols-12 gap-12">
         <div class="col-span-12 lg:col-span-4 flex justify-center">
           <img
             src="https://github.com/gabrielmaxgb.png"
@@ -157,8 +154,14 @@
 
     <!-- Rodapé / Manifesto -->
     <footer class="w-10/12 py-12 text-center text-neutral border-t border-neutral mt-16">
-      <p class="italic text-xl">Se você quer ensinar, cobre. Se quer ajudar, doe.</p>
-      <p class="text-lg text-neutral">pros4noobs — um projeto de código e consciência.</p>
+      <p class="italic text-lg"
+        >Porque todo <span class="text-primary font-semibold">Pro</span> já foi
+        <span class="text-secondary font-semibold">Noob</span></p
+      >
+      <p class="text-lg text-neutral"
+        ><span class="text-primary font-semibold">Pros4Noob</span> — um projeto de código e
+        consciência.</p
+      >
 
       <p class="font-script text-sm text-neutral mt-6">
         Powered by

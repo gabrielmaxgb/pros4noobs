@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import SideNavItem from './SideNavItem.vue';
+
   type TSidenavigationBar_Item = {
     label: string;
     routeName: string;
@@ -13,9 +15,14 @@
   const sideNavigationBar: TSidenavigationBar = {
     top: [
       {
+        label: 'Perfil',
+        routeName: 'user-userId-profile',
+        icon: 'lucide:user',
+      },
+      {
         label: 'Painel',
         routeName: 'user-userId-dashboard',
-        icon: 'material-symbols:dashboard',
+        icon: 'lucide:layout-dashboard',
       },
       {
         label: 'Mentorias',
@@ -23,72 +30,110 @@
         icon: 'hugeicons:study-lamp',
       },
       {
-        label: 'Perfil',
-        routeName: 'user-userId-profile',
-        icon: 'material-symbols:account-circle',
+        label: 'Construtor de Currículo',
+        routeName: 'user-userId-portfolio-builder-editor',
+        icon: 'lucide:picture-in-picture',
+      },
+      {
+        label: 'Configurações',
+        routeName: 'user-userId-settings',
+        icon: 'lucide:settings',
       },
     ],
     bottom: [],
   };
 
   const route = useRoute();
-  const { logout } = useLogout();
+  const isSideNavCollapsed = ref(false);
 
   const handleSideBarItemClick = (item: TSidenavigationBar_Item) => {
-    console.log('item', item);
-    navigateTo({ name: item.routeName, params: { userId: 123 } });
+    navigateTo({ name: item.routeName, params: { userId: route.params.userId } });
   };
 
-  const handleLogoutClick = async () => {
-    await logout();
+  const handleLogoutClick = async () => {};
+
+  const isRouteActive = (routeName: string): boolean => {
+    return route.name?.toString().includes(routeName) || false;
   };
 </script>
 
 <template>
-  <div class="bg-internal-black w-[310px] h-full flex flex-col items-start justify-between p-6">
-    <section class="w-full flex flex-col gap-2">
-      <UButton
-        v-for="(item, index) in sideNavigationBar.top"
-        :key="index"
-        class="cursor-pointer"
-        :class="{
-          '': route.name === item.routeName,
-        }"
-        :variant="route.name === item.routeName ? 'soft' : 'ghost'"
-        :icon="item.icon"
-        size="xl"
-        @click="() => handleSideBarItemClick(item)"
-      >
-        <span>{{ item.label }}</span>
-      </UButton>
-    </section>
-    <section class="w-full flex flex-col gap-2">
-      <UModal :overlay="false" class="w-[100px]" title="Modal" size="sm">
-        <UButton class="w-full flex items-center gap-6 cursor-pointer" variant="ghost" size="xl">
-          <div class="flex items-center gap-2" variant="ghost" size="xl">
-            <UIcon name="emojione-v1:diamond-with-a-dot" size="20" />
-            <span>34</span>
-          </div>
-          <div class="flex items-center gap-2" variant="ghost" size="xl">
-            <UIcon name="fluent-color:coin-multiple-48" size="20" />
-            <span>11</span>
-          </div>
-        </UButton>
+  <div
+    class="relative bg-internal-black transition-all duration-200 py-6"
+    :class="isSideNavCollapsed ? 'w-[90px]' : 'w-[300px]'"
+  >
+    <div
+      class="absolute flex items-center justify-center top-2 right-[-12px] bg-primary p-1 rounded-full cursor-pointer"
+      @click="isSideNavCollapsed = !isSideNavCollapsed"
+    >
+      <UIcon
+        name="mdi:arrow-u-left-top-bold"
+        size="15"
+        class="transition-transform duration-300 text-internal-black"
+        :class="{ 'rotate-180': isSideNavCollapsed }"
+      />
+    </div>
 
-        <!-- <template #content> content </template> -->
+    <div class="h-full flex flex-col justify-between">
+      <section class="w-full flex flex-col gap-0">
+        <SideNavItem
+          v-for="(item, index) in sideNavigationBar.top"
+          :key="index"
+          :label="item.label"
+          :icon="item.icon"
+          :active="isRouteActive(item.routeName)"
+          :collapsed="isSideNavCollapsed"
+          @click="() => handleSideBarItemClick(item)"
+        />
+      </section>
 
-        <template #body>Content</template>
-      </UModal>
+      <section class="w-full flex flex-col gap-0">
+        <UModal :overlay="true" class="w-[100%]" title="Modal Title" size="sm">
+          <SideNavItem
+            :label="'Noob Coins'"
+            icon="carbon:software-resource-cluster"
+            class="text-primary bg-gradient-to-br from-primary/10 via-black/10 to-secondary/10"
+            :active="false"
+            :collapsed="isSideNavCollapsed"
+          >
+            <template #custom-content>
+              <div v-if="isSideNavCollapsed" class="flex items-center justify-center">
+                <UIcon name="material-symbols:money-bag-rounded" size="20" class="text-primary" />
+              </div>
+              <div v-if="!isSideNavCollapsed" class="flex items-center justify-start gap-4">
+                <div class="flex items-center gap-2">
+                  <div class="relative flex items-center justify-center">
+                    <div
+                      class="absolute size-28 rounded-full bg-warning/50 opacity-30 blur-xl animate-pulse scale-20"
+                    />
+                    <UIcon name="solar:fire-broken" size="20" class="text-warning" />
+                  </div>
+                  <p class="text-warning">23 <span class="text-xs">Flares</span></p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="relative flex items-center justify-center">
+                    <div
+                      class="absolute size-28 rounded-full bg-secondary/50 opacity-30 blur-xl animate-pulse scale-20"
+                    />
+                    <UIcon name="cuida:sparks-outline" size="20" class="text-secondary" />
+                  </div>
+                  <span class="text-secondary">8 <span class="text-xs">Sparks</span></span>
+                </div>
+              </div>
+            </template>
+          </SideNavItem>
 
-      <UButton
-        class="cursor-pointer"
-        variant="link"
-        size="xl"
-        @click.prevent="() => handleLogoutClick()"
-      >
-        <UIcon name="material-symbols:logout" size="20" />
-        <span>Sair</span>
-      </UButton>
-    </section>
+          <template #body>Modal Content</template>
+        </UModal>
+
+        <SideNavItem
+          :label="'Sair'"
+          icon="lucide:log-out"
+          :active="false"
+          :collapsed="isSideNavCollapsed"
+          @click="handleLogoutClick"
+        />
+      </section>
+    </div>
   </div>
 </template>
