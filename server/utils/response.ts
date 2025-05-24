@@ -6,6 +6,9 @@ export const Ok = <T>(data: T, message = 'Request processed successfully.') =>
 
 export const NoContent = (message = 'No content.') => makeResponseWithoutData(204, message);
 
+export const OkWithoutData = (message = 'Request processed successfully.') =>
+  makeResponseWithoutData(200, message);
+
 export const Created = <T>(data: T, message = 'Resource created successfully.') =>
   makeResponse(201, message, data);
 

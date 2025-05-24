@@ -3,7 +3,7 @@ import { UserService } from '~/server/core/user/userService';
 import { userToModel } from '~/server/core/user/user';
 import { useScope } from '~/server/core/container';
 import { createUserSchema } from '~/shared/user';
-import { Created, BadRequest, InternalServerError } from '~/server/utils/response';
+import { Created, BadRequest } from '~/server/utils/response';
 
 export default defineSafeHandler(async (event) => {
   const [data, errors] = await useBodySchemaAsync(createUserSchema);

@@ -1,13 +1,14 @@
 <script setup lang="ts">
   import type { TabsItem } from '@nuxt/ui';
 
+  definePageMeta({
+    layout: 'auth',
+    ssr: false,
+  });
+
   type MyTabsItem = TabsItem & {
     value: 'editor' | 'preview';
   };
-
-  definePageMeta({
-    layout: 'auth',
-  });
 
   const route = useRoute();
   const router = useRouter();

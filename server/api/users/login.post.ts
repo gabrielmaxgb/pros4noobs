@@ -1,4 +1,4 @@
-import { defineEventHandler, readBody, setCookie } from 'h3';
+import { setCookie } from 'h3';
 import { generateToken } from '~/server/core/auth/tokens';
 import { loginDtoSchema } from '~/shared/user/loginDto';
 import { Ok, NotFound, BadRequest, InternalServerError } from '~/server/utils/response';
