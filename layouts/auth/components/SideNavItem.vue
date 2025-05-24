@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  defineProps<{
+  const props = defineProps<{
     label: string;
     icon: string;
     active: boolean;
@@ -21,11 +21,19 @@
   >
     <slot v-if="$slots['custom-content']" name="custom-content" />
     <div v-else class="flex items-center" :class="[!collapsed ? 'gap-3' : '']">
-      <UIcon :name="icon" size="20" />
+      <UIcon
+        :name="icon"
+        size="20"
+        class="text-neutral-400"
+        :class="{ 'text-primary': props.active }"
+      />
 
       <span
-        class="whitespace-nowrap transition-all duration-300 delay-100"
-        :class="collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto'"
+        class="whitespace-nowrap"
+        :class="[
+          collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto',
+          props.active ? 'text-primary' : 'text-neutral-400',
+        ]"
       >
         {{ label }}
       </span>

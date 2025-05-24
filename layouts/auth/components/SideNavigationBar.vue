@@ -32,7 +32,7 @@
       {
         label: 'Construtor de Currículo',
         routeName: 'user-userId-portfolio-builder-editor',
-        icon: 'lucide:picture-in-picture',
+        icon: 'nimbus:tools',
       },
       {
         label: 'Configurações',
@@ -111,16 +111,16 @@
                     />
                     <UIcon name="solar:fire-bold" size="20" class="text-warning" />
                   </div>
-                  <p class="text-neutral-50">23 <span class="text-xs">Flares</span></p>
+                  <p class="text-warning">23 <span class="text-xs">Flares</span></p>
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="relative flex items-center justify-center">
                     <div
-                      class="absolute size-28 rounded-full bg-red-500/50 opacity-30 blur-2xl animate-pulse scale-15"
+                      class="absolute size-28 rounded-full bg-red-400/50 opacity-30 blur-2xl animate-pulse scale-15"
                     />
-                    <UIcon name="cuida:sparks-outline" size="20" class="text-red-500" />
+                    <UIcon name="cuida:sparks-outline" size="20" class="text-red-400" />
                   </div>
-                  <span class="text-neutral-50">8 <span class="text-xs">Sparks</span></span>
+                  <span class="text-red-400">8 <span class="text-xs">Sparks</span></span>
                 </div>
               </div>
             </template>

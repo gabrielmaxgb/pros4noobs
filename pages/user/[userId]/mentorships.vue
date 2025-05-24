@@ -1,6 +1,7 @@
 <script setup lang="ts">
   definePageMeta({
     layout: 'auth',
+    ssr: false,
   });
 </script>
 
