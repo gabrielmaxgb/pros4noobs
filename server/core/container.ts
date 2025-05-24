@@ -17,7 +17,7 @@ const newScope = () => {
     return requestContainer;
 }
 
-const useScope = () => {
+const useScope = (): Container => {
     const event = useEvent();
 
     if (!event.context.di) {

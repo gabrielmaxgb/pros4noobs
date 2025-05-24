@@ -1,10 +1,10 @@
-import { IUserModel, LoginDto } from '~/shared/user';
-import { User, UserRecord, userToModel } from '../user/user';
+import { User, UserRecord } from '../user/user';
 import { verify } from 'argon2';
 import { generateToken, verifyToken } from './tokens';
 import { setCookie, H3Event, EventHandlerRequest } from 'h3';
 import { Result } from '~/server/utils/result';
 import { injectable } from 'inversify';
+import { LoginDto } from '~/shared/user/loginDto';
 
 @injectable()
 export class LoginService {
@@ -13,7 +13,7 @@ export class LoginService {
   public async login(
     event: H3Event<EventHandlerRequest>,
     data: LoginDto
-  ): Promise<Result<IUserModel>> {
+  ): Promise<Result<User>> {
     const user = await UserRecord.findOne({ email: data.email });
     if (!user) {
       return Result.Fail('Invalid email or password');
@@ -25,8 +25,7 @@ export class LoginService {
       return Result.Fail('Invalid email or password');
     }
 
-    const model = userToModel(user);
-    const token = generateToken(model.id);
+    const token = generateToken(user.id);
 
     setCookie(event, 'token', token, {
       httpOnly: true,
@@ -35,10 +34,10 @@ export class LoginService {
       maxAge: 60 * 60 * 24, // 1 day
     });
 
-    return Result.Ok(model);
+    return Result.Ok(user);
   }
 
-  public async userFromToken(token: string): Promise<Result<User>> {
+  public async getUserFromToken(token: string): Promise<Result<User>> {
     let userId: string;
     try {
       userId = verifyToken(token);
