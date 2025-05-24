@@ -33,6 +33,12 @@ export default defineNuxtConfig({
     ],
   },
 
+  nitro: {
+    experimental: {
+      asyncContext: true,
+    }
+  },
+
   mongoose: {
     modelsDir: 'server/models',
     options: {

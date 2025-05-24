@@ -1,4 +1,4 @@
-import GeneralConfiguration from '../models/configurations'
+import GeneralConfiguration from '../core/configuration/configurations'
 
 export default async function seedCore() {
   const techsConfig = await GeneralConfiguration.findOne({
