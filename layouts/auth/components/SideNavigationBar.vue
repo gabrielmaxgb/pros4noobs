@@ -15,14 +15,14 @@
   const sideNavigationBar: TSidenavigationBar = {
     top: [
       {
-        label: 'Perfil',
-        routeName: 'user-userId-profile',
-        icon: 'lucide:user',
-      },
-      {
         label: 'Painel',
         routeName: 'user-userId-dashboard',
         icon: 'lucide:layout-dashboard',
+      },
+      {
+        label: 'Perfil',
+        routeName: 'user-userId-profile',
+        icon: 'lucide:user',
       },
       {
         label: 'Mentorias',
@@ -95,7 +95,7 @@
           <SideNavItem
             :label="'Noob Coins'"
             icon="carbon:software-resource-cluster"
-            class="text-primary bg-gradient-to-br from-primary/10 via-black/10 to-secondary/10"
+            class="text-primary bg-gradient-to-br from-primary/10 via-black/10 to-secondary/10 py-4"
             :active="false"
             :collapsed="isSideNavCollapsed"
           >
@@ -103,7 +103,7 @@
               <div v-if="isSideNavCollapsed" class="flex items-center justify-center">
                 <UIcon name="material-symbols:money-bag-rounded" size="20" class="text-primary" />
               </div>
-              <div v-if="!isSideNavCollapsed" class="flex items-center justify-start gap-4">
+              <div v-if="!isSideNavCollapsed" class="flex flex-col items-start justify-start gap-4">
                 <div class="flex items-center gap-2">
                   <div class="relative flex items-center justify-center">
                     <div
@@ -134,6 +134,7 @@
           icon="lucide:log-out"
           :active="false"
           :collapsed="isSideNavCollapsed"
+          class="mt-4"
           @click="handleLogoutClick"
         />
       </section>
