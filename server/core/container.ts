@@ -3,10 +3,12 @@ import { Container } from 'inversify';
 import { ConfigurationCache } from './configuration/configurationCache';
 import { UserService } from './user/userService';
 import { LoginService } from './auth/loginService';
+import { ConsoleMailService, IMailService, MailServiceSid } from '../infra/mail';
 
 const container = new Container({ defaultScope: 'Request' });
 
 container.bind(ConfigurationCache).toSelf().inSingletonScope();
+container.bind(MailServiceSid).to(ConsoleMailService).inSingletonScope();
 
 const newScope = () => {
     const requestContainer = new Container({ defaultScope: 'Request', parent: container });

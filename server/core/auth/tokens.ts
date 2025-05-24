@@ -31,4 +31,32 @@ const verifyToken = (token: string) => {
     }
 }
 
-export { generateToken, verifyToken };
+const generatePasswordRecoveryToken = (userId: string, nonce: string) => {
+    const secret = process.env.JWT_SECRET ;
+    if (!secret) {
+        throw new Error('JWT secret is not defined');
+    }
+
+    const expiresIn = '1h';
+
+    const token = jwt.sign({ id: userId, nonce }, secret, { expiresIn, audience: 'password-recovery' });
+    return token;
+}
+
+const verifyPasswordRecoveryToken = (token: string) => {
+    const secret = process.env.JWT_SECRET ;
+    if (!secret) {
+        throw new Error('JWT secret is not defined');
+    }
+
+    try {
+        const decoded = jwt.verify(token, secret, { audience: 'password-recovery' });
+        
+        const data = decoded as { id: string, nonce: string };
+        return [ data.id, data.nonce ];
+    } catch (error) {
+        throw new Error('Invalid token');
+    }
+}
+
+export { generateToken, verifyToken, generatePasswordRecoveryToken, verifyPasswordRecoveryToken };
