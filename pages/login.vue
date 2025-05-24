@@ -7,20 +7,12 @@
 
   definePageMeta({
     layout: false,
-    middleware: () => {
-      const session = useSession();
-      if (session.isAuthenticated) {
-        return navigateTo({
-          name: 'user-userId-profile',
-          params: { userId: session.user.value?.id },
-        });
-      }
-    },
+    middleware: 'redirect-if-authenticated',
   });
 
   export type TLoginForm = zType.infer<typeof loginFormSchema>;
 
-  // const router = useRouter();
+  const showPassword = ref(false);
   const session = useSession();
   const loginFormErrors = reactive<Partial<Record<keyof TLoginForm, string>>>({});
   const loginForm = ref<TLoginForm>({
@@ -34,16 +26,15 @@
 
   const { mutate: loginMutation, isPending: isLoginMutationPending } = useMutation({
     mutationFn: () => login(loginForm.value),
-    onSuccess: async (_data: IUserModel) => {
-      await session.fetchSession();
+    onSuccess: async (data: IUserModel) => {
+      session.setSession(data);
       navigateTo({
         name: 'user-userId-dashboard',
-        params: { userId: session.user.value?.id },
+        params: { userId: data.id },
       });
     },
     onError: (error) => {
       console.error('Erro ao fazer login:', error);
-      // Aqui pode mostrar mensagem de erro genérica
     },
   });
 
@@ -88,7 +79,6 @@
   <Paper
     class="relative w-full h-[100vh] flex flex-col items-center justify-center bg-accented gap-6 py-20"
   >
-    <!-- color="primary" -->
     <UButton
       size="xl"
       class="absolute top-6 left-6 text-primary cursor-pointer"
@@ -132,13 +122,26 @@
       <div>
         <UInput
           v-model="loginForm.password"
-          label="Senha"
-          type="password"
-          size="xl"
-          :error="loginFormErrors.password"
           placeholder="Senha"
+          :type="showPassword ? 'text' : 'password'"
           class="w-full"
-        />
+          size="xl"
+          :aria-invalid="loginFormErrors.password ? 'true' : 'false'"
+          :ui="{ trailing: 'pe-1' }"
+        >
+          <template #trailing>
+            <UButton
+              color="neutral"
+              variant="link"
+              size="xl"
+              :icon="!showPassword ? 'i-lucide-eye-off' : 'i-lucide-eye'"
+              :aria-label="showPassword ? 'Esconder' : 'Mostrar'"
+              :aria-pressed="showPassword"
+              aria-controls="password"
+              @click="showPassword = !showPassword"
+            />
+          </template>
+        </UInput>
         <p v-if="loginFormErrors.password" class="text-red-500 text-sm mt-1">
           {{ loginFormErrors.password }}
         </p>
@@ -163,10 +166,9 @@
       :variant="'link'"
       size="md"
       class="max-w-fit cursor-pointer"
+      @click="navigateTo({ name: 'password-recovery' })"
     >
       Esqueci a senha
     </UButton>
   </Paper>
-  <!-- </section>
-  </div> -->
 </template>

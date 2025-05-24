@@ -32,7 +32,7 @@
       {
         label: 'Construtor de Currículo',
         routeName: 'user-userId-portfolio-builder-editor',
-        icon: 'lucide:picture-in-picture',
+        icon: 'nimbus:tools',
       },
       {
         label: 'Configurações',
@@ -45,12 +45,15 @@
 
   const route = useRoute();
   const isSideNavCollapsed = ref(false);
+  const session = useSession();
 
   const handleSideBarItemClick = (item: TSidenavigationBar_Item) => {
     navigateTo({ name: item.routeName, params: { userId: route.params.userId } });
   };
 
-  const handleLogoutClick = async () => {};
+  const handleLogoutClick = async () => {
+    session.logout();
+  };
 
   const isRouteActive = (routeName: string): boolean => {
     return route.name?.toString().includes(routeName) || false;
@@ -104,20 +107,20 @@
                 <div class="flex items-center gap-2">
                   <div class="relative flex items-center justify-center">
                     <div
-                      class="absolute size-28 rounded-full bg-warning/50 opacity-30 blur-xl animate-pulse scale-20"
+                      class="absolute size-28 rounded-full bg-warning/50 opacity-30 blur-2xl animate-pulse scale-15"
                     />
-                    <UIcon name="solar:fire-broken" size="20" class="text-warning" />
+                    <UIcon name="solar:fire-bold" size="20" class="text-warning" />
                   </div>
                   <p class="text-warning">23 <span class="text-xs">Flares</span></p>
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="relative flex items-center justify-center">
                     <div
-                      class="absolute size-28 rounded-full bg-secondary/50 opacity-30 blur-xl animate-pulse scale-20"
+                      class="absolute size-28 rounded-full bg-red-400/50 opacity-30 blur-2xl animate-pulse scale-15"
                     />
-                    <UIcon name="cuida:sparks-outline" size="20" class="text-secondary" />
+                    <UIcon name="cuida:sparks-outline" size="20" class="text-red-400" />
                   </div>
-                  <span class="text-secondary">8 <span class="text-xs">Sparks</span></span>
+                  <span class="text-red-400">8 <span class="text-xs">Sparks</span></span>
                 </div>
               </div>
             </template>
