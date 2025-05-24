@@ -1,7 +1,6 @@
 import {
   Ok,
   Unauthorized,
-  InternalServerError,
 } from '~/server/utils/response';
 import { userToModel } from '~/server/core/user/user';
 import { useScope } from '~/server/core/container';

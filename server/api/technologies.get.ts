@@ -1,4 +1,4 @@
-import { Ok, InternalServerError } from '~/server/utils/response';
+import { Ok } from '~/server/utils/response';
 import { useConfigurationAsync } from '~/server/core/configuration/useConfiguration';
 import { defineSafeHandler } from '../utils/handlers';
 
