@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
     const [data, errors] = parseAndValidate(createUserSchema, body);
 
     if (errors) {
-      return BadRequest(event, 'Invalid input');
+      return BadRequest('Invalid input');
     }
 
     const scope = useScope();
@@ -20,13 +20,13 @@ export default defineEventHandler(async (event) => {
     const result = await userService.createUser(data);
 
     if (result.isFailure) {
-      return BadRequest(event, result.error);
+      return BadRequest(result.error);
     }
 
     const model = userToModel(result.data!);
 
-    return Created(event, model, 'User created successfully.');
+    return Created(model, 'User created successfully.');
   } catch (error: any) {
-    return InternalServerError(event, 'Internal server error.');
+    return InternalServerError();
   }
 });

@@ -8,11 +8,11 @@ export default defineEventHandler(async (_event) => {
 
     if (techsConfig) {
       const techs = techsConfig.split(',').map((tech: string) => tech.trim());
-      return Ok(_event, techs, 'Technologies listed successfully.');
+      return Ok(techs, 'Technologies listed successfully.');
     }
 
-    return Ok(_event, [], 'No technologies found.');
+    return Ok([], 'No technologies found.');
   } catch (error: any) {
-    return InternalServerError(_event, 'Internal server error.');
+    return InternalServerError();
   }
 });

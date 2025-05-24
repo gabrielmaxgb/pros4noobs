@@ -1,76 +1,42 @@
-import { H3Event, EventHandlerRequest, setResponseStatus } from 'h3';
+import { setResponseStatus } from 'h3';
 import { ApiResponse } from '~/shared/apiResponse';
 
-export const Ok = <T>(
-  event: H3Event<EventHandlerRequest>,
-  data: T,
-  message = 'Request processed successfully.'
-): ApiResponse<T> => {
-  setResponseStatus(event, 200);
+export const Ok = <T>(data: T, message = 'Request processed successfully.') =>
+  makeResponse(200, message, data);
+
+export const Created = <T>(data: T, message = 'Resource created successfully.') =>
+  makeResponse(201, message, data);
+
+export const BadRequest = (message = 'Bad request.') => makeResponseWithoutData(400, message);
+
+export const NotFound = (message = 'Resource not found.') => makeResponseWithoutData(404, message);
+
+export const Unauthorized = (message = 'Unauthorized.') => makeResponseWithoutData(401, message);
+
+export const InternalServerError = (message = 'Internal server error.') =>
+  makeResponseWithoutData(500, message);
+
+const makeResponse = <T>(statusCode: number, message: string, data: T): ApiResponse<T> => {
+  setStatusCode(statusCode);
+
   return {
     data,
-    status: 200,
+    status: statusCode,
     message,
   };
 };
 
-export const Created = <T>(
-  event: H3Event<EventHandlerRequest>,
-  data: T,
-  message = 'Resource created successfully.'
-): ApiResponse<T> => {
-  setResponseStatus(event, 201);
-  return {
-    data,
-    status: 201,
-    message,
-  };
-};
+const makeResponseWithoutData = (statusCode: number, message: string): ApiResponse<any> => {
+  setStatusCode(statusCode);
 
-export const NotFound = (
-  event: H3Event<EventHandlerRequest>,
-  message = 'Resource not found.'
-): ApiResponse<any> => {
-  setResponseStatus(event, 404);
   return {
     data: {},
-    status: 404,
+    status: statusCode,
     message,
   };
 };
 
-export const BadRequest = (
-  event: H3Event<EventHandlerRequest>,
-  message = 'Bad request.'
-): ApiResponse<any> => {
-  setResponseStatus(event, 400);
-  return {
-    data: {},
-    status: 400,
-    message,
-  };
-};
-
-export const Unauthorized = (
-  event: H3Event<EventHandlerRequest>,
-  message = 'Unauthorized.'
-): ApiResponse<any> => {
-  setResponseStatus(event, 401);
-  return {
-    data: {},
-    status: 401,
-    message,
-  };
-};
-
-export const InternalServerError = (
-  event: H3Event<EventHandlerRequest>,
-  message = 'Internal server error.'
-): ApiResponse<any> => {
-  setResponseStatus(event, 500);
-  return {
-    data: {},
-    status: 500,
-    message,
-  };
+const setStatusCode = (statusCode: number) => {
+  const event = useEvent();
+  setResponseStatus(event, statusCode);
 };

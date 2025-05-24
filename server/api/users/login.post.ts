@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
     const [data, errors] = parseAndValidate(loginDtoSchema, body);
 
     if (errors) {
-      return BadRequest(event, 'Invalid input');
+      return BadRequest('Invalid input');
     }
 
     const scope = useScope();
@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     const result = await loginService.login(event, data);
 
     if (result.isFailure) {
-      return NotFound(event, result.error);
+      return NotFound(result.error);
     }
 
     const model = userToModel(result.data!);
@@ -34,8 +34,8 @@ export default defineEventHandler(async (event) => {
       maxAge: 60 * 60 * 24, // 1 dia
     });
 
-    return Ok(event, model, 'Logged in successfully.');
+    return Ok(model, 'Logged in successfully.');
   } catch (error: any) {
-    return InternalServerError(event, 'Internal server error.');
+    return InternalServerError();
   }
 });
