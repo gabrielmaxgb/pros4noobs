@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <section class="hidden max-w-fit md:flex items-center gap-4 overflow-x-scroll">
+  <section class="hidden max-w-fit md:flex items-center gap-4 overflow-x-auto">
     <NuxtLink
       v-for="(btn, index) in props.navigationOptions"
       :key="index"

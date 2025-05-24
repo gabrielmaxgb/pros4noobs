@@ -1,7 +1,7 @@
 <script setup lang="ts">
   onMounted(() => {
-    const session = useSession();
-    session.fetchSession();
+    // const session = useSession();
+    // session.fetchSession();
   });
 
   // const session = useSession();

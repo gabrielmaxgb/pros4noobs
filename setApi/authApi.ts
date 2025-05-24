@@ -21,3 +21,11 @@ export const login = async (payload: TLoginForm): Promise<TLoginResponse> => {
   });
   return data;
 };
+
+export const logout = async () => {
+  const { data } = await authApi('/api/users/logout', {
+    method: 'POST',
+  });
+  console.log('logout data', data);
+  return data;
+};

@@ -50,7 +50,7 @@
     />
   </div>
 
-  technologiesList: {{ technologiesList }} <br />
+  <!-- technologiesList: {{ technologiesList }} <br /> -->
 
   <div>
     <USelectMenu

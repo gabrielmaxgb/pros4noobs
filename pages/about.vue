@@ -4,7 +4,7 @@
       <div class="col-span-12 lg:col-span-8 grid grid-cols-12 gap-4">
         <Paper class="col-span-12 flex flex-col">
           <h1 class="text-primary text-4xl font-header mb-4">Sobre a Pros4Noobs</h1>
-          <p>
+          <p class="text-neutral-50">
             A pros4noobs é uma iniciativa sem fins lucrativos que conecta desenvolvedores
             experientes (pros) com pessoas que estão começando (noobs) de forma gratuita, justa e
             consciente.

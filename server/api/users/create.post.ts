@@ -3,7 +3,7 @@ import { defineEventHandler, readBody, setResponseStatus } from 'h3';
 import GeneralConfiguration from '~/server/models/configurations';
 import { type TCreateUser_DTO, type IUserModel, createUserSchema } from '~/shared/user';
 import * as argon2 from 'argon2';
-import { Ok, Created, NotFound, BadRequest, InternalServerError } from '~/server/utils/response';
+import { Created, BadRequest, InternalServerError } from '~/server/utils/response';
 
 export default defineEventHandler(async (event) => {
   try {
